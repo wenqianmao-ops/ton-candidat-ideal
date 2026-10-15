@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ton candidat idéal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: pop-poster world. Full-width landing, then a phone-width "game" column; every level has its own flat color. Single committed light look. */
+:root{
+  --ink:#15131C;
+  --paper:#FFFFFF;
+  --sun:#FFD83D;
+  --pink:#FF4F9A;
+  --cobalt:#2B4BFF;
+  --muted:#4B4757;
+  --display:'Anton', Impact, 'Arial Narrow', sans-serif;
+  --body:'Familjen Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --bg:var(--sun);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;transition:background-color .35s ease;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.09;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+#app{position:relative;z-index:1}
+button{font:inherit;color:inherit}
+input{color:var(--ink);-webkit-text-fill-color:var(--ink);caret-color:var(--ink);color-scheme:light}
+input::placeholder{color:#8A8597;-webkit-text-fill-color:#8A8597}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+h1,h2,h3{text-wrap:balance;margin:0}
+.mono{font-family:var(--mono);font-weight:600;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+.display{font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:.005em;line-height:1}
+
+/* ---------- shared controls ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:1rem;border:3px solid var(--ink);border-radius:999px;padding:13px 22px;background:var(--paper);color:var(--ink);box-shadow:4px 4px 0 var(--ink);cursor:pointer;transition:transform .08s ease, box-shadow .08s ease;text-decoration:none;min-height:50px;text-align:center}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn.primary{background:var(--ink);color:var(--sun)}
+.btn.pink{background:var(--pink);color:var(--ink)}
+.btn.ghost{background:transparent;box-shadow:none;border-color:var(--ink)}
+.btn.ghost:hover{background:rgba(255,255,255,.35)}
+.btn.small{padding:8px 14px;min-height:40px;font-size:.9rem;box-shadow:3px 3px 0 var(--ink)}
+.btn.big{font-size:1.15rem;min-height:62px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:2px 2px 0 var(--ink)}
+.sticker{display:inline-block;background:var(--paper);border:2.5px solid var(--ink);border-radius:10px;padding:4px 10px;font-weight:700;box-shadow:3px 3px 0 var(--ink)}
+.chip{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);border-radius:999px;padding:4px 11px;font-weight:600;font-size:.86rem;background:var(--paper)}
+.dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink);flex:none}
+
+/* ---------- top bar ---------- */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;background:none;border:0;padding:0}
+.logo-mark{font-family:var(--display);font-size:1.05rem;background:var(--ink);color:var(--sun);padding:5px 8px 4px;border-radius:8px;transform:rotate(-4deg);line-height:1}
+.logo-text{font-weight:700;font-size:1rem;white-space:nowrap}
+.top-right{display:flex;align-items:center;gap:8px}
+.lang{display:flex;border:2.5px solid var(--ink);border-radius:999px;overflow:hidden;background:var(--paper)}
+.lang button{border:0;background:none;padding:5px 10px;font-weight:700;font-size:.8rem;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.xp{font-family:var(--mono);font-weight:600;font-size:.8rem;background:var(--paper);border:2.5px solid var(--ink);border-radius:999px;padding:5px 10px;white-space:nowrap}
+
+/* ---------- landing ---------- */
+.landing{max-width:1140px;margin:0 auto;padding-inline:20px;padding-block:0 40px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-block:28px 40px}
+.hero-copy{min-width:0}
+.hero .kicker{display:inline-block;margin-bottom:18px;transform:rotate(-2deg)}
+.hero h1{font-size:clamp(3.2rem,9vw,7.4rem)}
+.hero h1 .hl{display:inline-block;background:var(--pink);padding:0 .12em;border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);transform:rotate(-2deg);margin-block:.06em}
+.hero p.lead{font-size:1.2rem;max-width:34ch;margin:22px 0 26px;font-weight:500}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero-art{position:relative;min-width:0;display:flex;justify-content:center}
+.slot{position:relative;width:min(340px,100%);aspect-ratio:3/4;background:var(--cobalt);border:4px solid var(--ink);border-radius:26px;box-shadow:10px 10px 0 var(--ink);overflow:hidden;transform:rotate(2deg)}
+.slot canvas{width:100%;height:100%;display:block}
+.slot .slot-label{position:absolute;left:14px;right:14px;bottom:14px;text-align:center;background:var(--paper);border:3px solid var(--ink);border-radius:12px;padding:8px;font-family:var(--display);font-size:1.5rem;text-transform:uppercase;line-height:1}
+.float{position:absolute;font-weight:700;font-size:.85rem;max-width:180px;z-index:2}
+.float.f1{top:6%;left:-4%;transform:rotate(-7deg);background:var(--sun)}
+.float.f2{top:44%;right:-6%;transform:rotate(6deg);background:#7DF0C2}
+.float.f3{bottom:20%;left:-8%;transform:rotate(4deg);background:#FF8FB8}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);border:3px solid var(--ink);border-radius:18px;background:var(--paper);overflow:hidden;box-shadow:6px 6px 0 var(--ink)}
+.stats div{padding:16px 12px;text-align:center;border-left:3px solid var(--ink)}
+.stats div:first-child{border-left:0}
+.stats b{display:block;font-family:var(--display);font-size:2.3rem;line-height:1;font-weight:400;font-variant-numeric:tabular-nums}
+.stats span{font-size:.85rem;font-weight:600;color:var(--muted)}
+.stats-note{margin:12px 2px 0;font-weight:600}
+.section{padding-block:56px 0}
+.section h2{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:22px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{background:var(--paper);border:3px solid var(--ink);border-radius:20px;padding:20px;box-shadow:5px 5px 0 var(--ink);min-width:0}
+.step:nth-child(1){background:#7DF0C2}.step:nth-child(2){background:#C9B8FF}.step:nth-child(3){background:#FF8FB8}
+.step .n{font-family:var(--display);font-size:3rem;line-height:1}
+.step h3{font-size:1.25rem;margin:8px 0 6px}
+.step p{margin:0;font-weight:500}
+.themes-cloud{display:flex;flex-wrap:wrap;gap:10px}
+.themes-cloud span{border:3px solid var(--ink);border-radius:999px;padding:8px 16px;font-weight:700;box-shadow:3px 3px 0 var(--ink)}
+.themes-cloud span:nth-child(odd){transform:rotate(-1.5deg)}
+.themes-cloud span:nth-child(even){transform:rotate(1.5deg)}
+.social{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.feat{background:var(--ink);color:var(--paper);border-radius:22px;padding:24px;border:3px solid var(--ink);min-width:0}
+.feat h3{font-size:1.5rem;margin-bottom:8px}
+.feat p{margin:0 0 16px;color:#D9D6E3}
+.match-demo{background:var(--paper);color:var(--ink);border-radius:16px;padding:16px;display:grid;gap:8px;border:3px solid var(--paper)}
+.match-demo .big{font-family:var(--display);font-size:3rem;line-height:1}
+.guess-demo{display:flex;flex-wrap:wrap;gap:8px}
+.guess-demo .chip{background:var(--paper);color:var(--ink)}
+.guess-demo .q{width:100%;font-family:var(--display);font-size:1.6rem;color:var(--sun);text-transform:uppercase}
+.unlike{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.unlike div{border:3px dashed var(--ink);border-radius:16px;padding:16px;min-width:0}
+.unlike b{display:block;margin-bottom:4px}
+.code-in{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.code-in input{flex:1 1 220px;min-width:0;border:3px solid var(--ink);border-radius:999px;padding:11px 16px;font:500 .95rem var(--body);background:var(--paper)}
+.foot{margin-top:56px;padding-block:22px;border-top:3px solid var(--ink);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:.9rem;font-weight:500}
+.foot button{background:none;border:0;text-decoration:underline;cursor:pointer;font-weight:700;padding:0}
+
+/* ---------- game column ---------- */
+.col{max-width:480px;margin:0 auto;padding-inline:16px;padding-block:0 28px;min-height:100vh;display:flex;flex-direction:column}
+.progress{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-block:4px 18px}
+.progress i{height:10px;border:2px solid var(--ink);border-radius:99px;background:rgba(255,255,255,.55)}
+.progress i.done{background:var(--ink)}
+.progress i.cur{background:var(--paper);box-shadow:inset 0 0 0 2px var(--ink)}
+.level{display:flex;justify-content:space-between;align-items:baseline;gap:10px;min-height:32px}
+.theme-title{font-size:clamp(2.6rem,12vw,3.8rem);margin:6px 0 4px}
+.prompt{font-weight:600;margin:0 0 16px}
+.cards{display:grid;gap:14px}
+.mcard{position:relative;text-align:left;background:var(--paper);border:3px solid var(--ink);border-radius:18px;padding:14px 16px 12px;box-shadow:5px 5px 0 var(--ink);cursor:pointer;transition:transform .14s ease, background-color .14s ease, color .14s ease, opacity .2s ease;animation:popin .38s cubic-bezier(.2,1.4,.4,1) both;width:100%}
+.mcard:nth-child(2){animation-delay:.05s}.mcard:nth-child(3){animation-delay:.1s}.mcard:nth-child(4){animation-delay:.15s}
+.mcard:hover{transform:translate(-1px,-2px)}
+.mcard .pick{display:block;width:100%;text-align:left;background:none;border:0;padding:0;margin:0;color:inherit;font:inherit;cursor:pointer}
+.mcard .pick:focus-visible{outline:3px solid var(--cobalt);outline-offset:6px;border-radius:8px}
+.mcard{cursor:default}
+.mcard .tag{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.mcard .letter{font-family:var(--display);font-size:1.1rem;background:var(--ink);color:var(--paper);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;line-height:1}
+.mcard .ttl{display:block;font-size:1.15rem;font-weight:700;line-height:1.2;margin-bottom:4px}
+.mcard .desc{display:block;margin:0;font-size:.96rem;color:var(--muted)}
+.mcard.sel{background:var(--ink);color:var(--paper);transform:rotate(-1.2deg) scale(1.02)}
+.mcard.sel .desc{color:#D9D6E3}
+.mcard.sel .letter{background:var(--sun);color:var(--ink)}
+.cards.locked .mcard:not(.sel){opacity:.35}
+.mcard .stamp{position:absolute;top:-12px;right:14px;background:var(--pink);color:var(--ink);border:2.5px solid var(--ink);border-radius:8px;padding:2px 8px;font-family:var(--display);font-size:1rem;transform:rotate(6deg);display:none}
+.mcard.sel .stamp{display:block;animation:stamp .3s cubic-bezier(.2,1.6,.4,1)}
+.src-toggle{display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:10px 14px 6px 0;min-height:40px;font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.src{margin-top:8px;padding:10px 12px;border:2px dashed currentColor;border-radius:12px;font-size:.85rem;cursor:default}
+.src a{font-weight:700;word-break:break-word}
+.badge-st{display:inline-block;font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1.5px solid currentColor;border-radius:6px;padding:1px 6px;margin-left:4px}
+.hint{font-size:.85rem;font-weight:600;margin:12px 0 0;opacity:.8}
+.actions{position:sticky;bottom:0;margin-top:auto;padding-top:18px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:1fr 1fr;gap:10px;background:linear-gradient(to bottom, transparent, var(--bg) 30%)}
+.actions .full{grid-column:1/-1}
+.backlink{background:none;border:0;font-weight:700;cursor:pointer;padding:6px 0;display:inline-flex;gap:6px;align-items:center}
+.xp-pop{position:fixed;left:50%;top:40%;transform:translateX(-50%);font-family:var(--display);font-size:3rem;color:var(--ink);background:var(--sun);border:3px solid var(--ink);border-radius:14px;padding:4px 16px;box-shadow:5px 5px 0 var(--ink);pointer-events:none;z-index:50;animation:xp .9s ease forwards}
+
+/* creator */
+.creator-stage{position:relative;align-self:center;width:min(240px,66vw);aspect-ratio:1;border:4px solid var(--ink);border-radius:50%;box-shadow:8px 8px 0 var(--ink);overflow:hidden;margin:6px auto 18px;background:var(--paper)}
+.creator-stage canvas{width:100%;height:100%;display:block}
+.ctrl-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.ctrl{display:flex;align-items:center;justify-content:space-between;gap:4px;background:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:4px;min-width:0}
+.ctrl span{font-weight:700;font-size:.9rem;text-align:center;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ctrl button{width:36px;height:36px;border-radius:10px;border:2px solid var(--ink);background:var(--sun);font-weight:700;cursor:pointer;flex:none}
+.field{display:grid;gap:6px;margin-bottom:16px}
+.field label,.field .lbl{font-weight:700}
+.row{display:flex;gap:8px;align-items:center}
+.row input{flex:1;min-width:0;border:3px solid var(--ink);border-radius:14px;padding:11px 14px;font:700 1.05rem var(--body);background:var(--paper)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.slogan-box{background:var(--paper);border:3px solid var(--ink);border-radius:14px;padding:12px 14px;font-weight:700;font-size:1.1rem;transform:rotate(-1deg);flex:1;min-width:0}
+
+/* result */
+.poster-wrap{display:flex;justify-content:center;margin:4px 0 18px}
+.poster-wrap canvas{width:min(100%,calc(64vh * 9 / 16));height:auto;aspect-ratio:9/16;border:4px solid var(--ink);border-radius:18px;box-shadow:8px 8px 0 var(--ink);display:block;background:var(--paper)}
+.reveal-head{font-size:clamp(2.4rem,11vw,3.4rem);margin:8px 0 14px}
+.share-card{background:var(--ink);color:var(--paper);border-radius:22px;padding:18px;margin-bottom:18px;display:grid;gap:12px}
+.share-card h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.9rem;line-height:1;color:var(--sun)}
+.share-card p{margin:0;color:#D9D6E3}
+.share-card .btn{border-color:var(--paper);box-shadow:4px 4px 0 var(--paper)}
+.share-card .btn.ghost{color:var(--paper);box-shadow:none}
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.apps a{font-size:.9rem;min-height:44px;padding:8px 10px}
+.bars{display:grid;gap:12px;margin-bottom:6px}
+.bar{background:var(--paper);border:3px solid var(--ink);border-radius:16px;padding:10px 12px;box-shadow:4px 4px 0 var(--ink)}
+.bar .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.bar .who{min-width:0}
+.bar .who b{display:block;font-size:1.05rem;line-height:1.2}
+.bar .who small{color:var(--muted);font-weight:500}
+.bar .pct{font-family:var(--display);font-size:2.2rem;line-height:1;font-variant-numeric:tabular-nums}
+.bar .track{height:14px;border:2px solid var(--ink);border-radius:99px;margin-top:8px;overflow:hidden;background:#F1EFF6}
+.bar .fill{height:100%;width:0;border-right:2px solid var(--ink);transition:width 1s cubic-bezier(.2,.9,.3,1)}
+.zeros{display:flex;flex-wrap:wrap;gap:6px;align-items:center;opacity:.75;margin-top:4px}
+.zeros .chip{background:transparent;font-size:.8rem}
+.panel{background:var(--paper);border:3px solid var(--ink);border-radius:20px;padding:16px;box-shadow:5px 5px 0 var(--ink);margin-bottom:18px}
+.panel h3{font-size:1.25rem;margin-bottom:10px}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{display:inline-flex;flex-direction:column;background:var(--sun);border:2.5px solid var(--ink);border-radius:12px;padding:6px 10px;transform:rotate(-1.5deg);max-width:100%}
+.badge:nth-child(2n){transform:rotate(1.5deg);background:#7DF0C2}
+.badge:nth-child(3n){background:#C9B8FF}
+.badge b{font-size:.95rem}
+.badge small{font-size:.78rem;font-weight:500}
+.brow{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:10px 0;border-top:2px solid #E3E0EA;align-items:center}
+.brow:first-child{border-top:0;padding-top:0}
+.brow .t{font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);grid-column:1/-1}
+.brow .m{font-weight:600;min-width:0}
+.brow .c{font-size:.82rem;white-space:nowrap}
+.compat{background:var(--pink);}
+.compat .score{font-family:var(--display);font-size:4.4rem;line-height:.9}
+.compat .vs{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.compat canvas{width:58px;height:58px;border-radius:50%;border:3px solid var(--ink);background:var(--paper)}
+.compat .line{margin:6px 0 0;font-weight:700}
+details.more summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";font-family:var(--display);font-size:1.6rem;line-height:1}
+details.more[open] summary::after{content:"–"}
+details.more[open] summary{margin-bottom:12px}
+.stack{display:grid;gap:10px}
+
+/* guess */
+.guess-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.guess-grid button{justify-content:flex-start;text-align:left;font-size:.95rem;padding:10px 12px;border-radius:14px;min-height:56px}
+.guess-grid button[disabled]{opacity:.7}
+.guess-grid button.right,.guess-grid button.wrong{opacity:1}
+.guess-grid button.right{background:#7DF0C2}
+.guess-grid button.wrong{background:#FF8FB8}
+
+/* how */
+.how h2{font-size:1.35rem;margin:20px 0 6px}
+.how h2:first-child{margin-top:0}
+.how p{margin:0 0 8px;max-width:62ch}
+.srclist{display:grid;gap:8px;margin-top:10px}
+.srclist div{font-size:.86rem;border-top:2px solid #E3E0EA;padding-top:8px}
+.srclist h4{margin:14px 0 2px;font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase}
+details summary{cursor:pointer;font-weight:700}
+
+.demo-flag{display:inline-block;background:var(--paper);border:2px dashed var(--ink);border-radius:10px;padding:6px 10px;font-size:.8rem;font-weight:600;margin-top:12px}
+.modal{position:fixed;inset:0;background:rgba(21,19,28,.78);z-index:60;display:grid;place-items:center;padding:16px}
+.modal-in{background:var(--paper);border:3px solid var(--ink);border-radius:20px;padding:14px;max-width:420px;width:100%;max-height:92vh;overflow:auto;display:grid;gap:10px}
+.modal-in img{width:100%;border-radius:12px;border:2px solid var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:999px;font-weight:700;z-index:70;animation:popin .25s ease both;max-width:calc(100% - 32px);text-align:center}
+
+@keyframes popin{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes stamp{from{transform:rotate(6deg) scale(2);opacity:0}to{transform:rotate(6deg) scale(1);opacity:1}}
+@keyframes xp{0%{opacity:0;transform:translate(-50%,10px) scale(.8)}20%{opacity:1;transform:translate(-50%,0) scale(1.05)}100%{opacity:0;transform:translate(-50%,-60px) scale(1)}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:34px;padding-top:12px}
+  .slot{width:min(230px,62vw)}
+  .float{display:none}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stats div:nth-child(4){border-left:0}
+  .stats div:nth-child(n+4){border-top:3px solid var(--ink)}
+  .steps,.social,.unlike{grid-template-columns:1fr}
+}
+@media (max-width:420px){
+  .logo-text{display:none}
+  .stats b{font-size:1.9rem}
+}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+(() => {
+/* ============ CONFIG ============ */
+const ARTIFACT_URL = ''; // share links use the site's own address
+const ROUND_THEMES = 7, PER_THEME = 4, PER_CAND = 4;
+
+/* ============ CANDIDATES ============ */
+// Colors are deliberately unrelated to party colors.
+const CANDS = {
+  melenchon:{name:'Jean-Luc Mélenchon', party:'La France insoumise', color:'#00B3A4', axis:0},
+  tondelier:{name:'Marine Tondelier', party:'Les Écologistes', color:'#2E6BFF', axis:1},
+  glucksmann:{name:'Raphaël Glucksmann', party:'Place publique · PS', color:'#FFB800', axis:2},
+  attal:{name:'Gabriel Attal', party:'Renaissance', color:'#A3D900', axis:3},
+  philippe:{name:'Édouard Philippe', party:'Horizons', color:'#FF4FA3', axis:4},
+  lepen:{name:'Marine Le Pen', party:'Rassemblement national', color:'#7C4DFF', axis:5},
+  zemmour:{name:'Éric Zemmour', party:'Reconquête', color:'#FF7A00', axis:6},
+};
+const CAND_IDS = Object.keys(CANDS);
+
+/* ============ SOURCES ============ */
+const SRC = {
+  esMelSmic:{label:'ÉlyséeScope 2027, « Le SMIC à 1 600 € »', date:'sept. 2026', url:'https://www.elyseescope.com/questions/melenchon-propose-de-porter-le-smic-a-1600-euros-pour-2027', ok:true},
+  esMel:{label:'ÉlyséeScope 2027, « Jean-Luc Mélenchon : positions et propositions »', date:'sept. 2026', url:'https://www.elyseescope.com/questions/jean-luc-melenchon-positions-programme-20260909', ok:true},
+  esLePen:{label:'ÉlyséeScope 2027, « Programme de Marine Le Pen pour 2027 »', date:'oct. 2026', url:'https://www.elyseescope.com/questions/programme-marine-le-pen-2027', ok:true},
+  euPhilippe:{label:'Euronews, « Édouard Philippe mise sur le travail et la réduction des dépenses publiques »', date:'9 oct. 2026', url:'https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ', ok:true},
+  esPhi:{label:'ÉlyséeScope 2027, « Édouard Philippe : positions et propositions »', date:'sept. 2026', url:'https://www.elyseescope.com/questions/edouard-philippe-positions-programme-20260909', ok:true},
+  philKiev:{label:'Europe 1, « Édouard Philippe a rencontré Volodymyr Zelensky à Kiev »', date:'mai 2026', url:'https://www.europe1.fr/international/candidat-a-la-prochaine-presidentielle-edouard-philippe-a-rencontre-volodymyr-zelensky-a-kiev-ce-mardi-938750', ok:true},
+  esZem1:{label:'ÉlyséeScope 2027, « Éric Zemmour : positions et propositions »', date:'oct. 2026', url:'https://www.elyseescope.com/questions/eric-zemmour-positions-programme-20261005', ok:true},
+  esZem2:{label:'ÉlyséeScope 2027, « Éric Zemmour : positions et propositions »', date:'sept. 2026', url:'https://www.elyseescope.com/questions/eric-zemmour-positions-programme-20260909', ok:true},
+  esTon:{label:'ÉlyséeScope 2027, « Marine Tondelier et ses propositions écologiques »', date:'sept. 2026', url:'https://www.elyseescope.com/questions/marine-tondelier-ecologie-2027', ok:true},
+  ecoloRep:{label:'Tunisie Numérique, « La première République écologique et citoyenne en 2027 »', date:'2026', url:'https://www.tunisienumerique.com/france-la-premiere-republique-ecologique-et-citoyenne-en-2027/', ok:true},
+  esGluZ:{label:'ÉlyséeScope 2027, « La taxe Zucman, une condition centrale »', date:'2026', url:'https://www.elyseescope.com/questions/raphael-glucksmann-et-la-taxe-zucman-une-condition-centrale-pour-les', ok:true},
+  esEurope:{label:'ÉlyséeScope 2027, « Europe 2027 : les candidats favorables ou hostiles à l’UE ? »', date:'2026', url:'https://www.elyseescope.com/questions/europe-programmes-candidats-presidentielle-2027', ok:true},
+  esForeign:{label:'ÉlyséeScope 2027, « Politique étrangère : OTAN, Russie, UE »', date:'juin 2026', url:'https://www.elyseescope.com/questions/politique-etrangere-france-2027-candidats-positions', ok:true},
+  esForeignRN:{label:'ÉlyséeScope 2027, « Politique étrangère » (position attribuée au RN, à confirmer)', date:'juin 2026', url:'https://www.elyseescope.com/questions/politique-etrangere-france-2027-candidats-positions', ok:false},
+  esInstit:{label:'ÉlyséeScope 2027, « VIe République et réforme des institutions »', date:'juin 2026', url:'https://www.elyseescope.com/questions/vie-republique-reforme-institutionnelle-francaise', ok:true},
+  esAttal:{label:'ÉlyséeScope 2027, « Programme Gabriel Attal 2027 »', date:'2026', url:'https://www.elyseescope.com/questions/gabriel-attal-programme-propositions-presidentielle-2027', ok:true},
+  esAttalImm:{label:'ÉlyséeScope 2027, « Gabriel Attal et l’immigration »', date:'2026', url:'https://www.elyseescope.com/questions/gabriel-attal-immigration-2027', ok:true},
+  bdor:{label:'BDOR, « Présidentielle 2027 : l’âge de la retraite selon les candidats »', date:'août 2026', url:'https://www.bdor.fr/actualites-or/presidentielle-2027-age-retraite-candidats', ok:true},
+  psRet:{label:'Public Sénat, « Reculer ou avancer l’âge légal : ce que proposent les candidats »', date:'2026', url:'https://www.publicsenat.fr/actualites/politique/reculer-ou-avancer-lage-legal-avec-ou-sans-capitalisation-ce-que-proposent-les-principaux-candidats-a-lelection-presidentielle-sur-les-retraites', ok:true},
+  attalAgri:{label:'Réussir, « Retailleau, Tondelier et Attal face aux Jeunes agriculteurs » (à confirmer)', date:'2026', url:'https://www.reussir.fr/retailleau-tondelier-et-attal-passent-leur-premier-oral-face-aux-jeunes-agriculteurs', ok:false},
+  lfi:{label:'L’Avenir en commun, programme LFI 2022 (à confirmer pour 2027)', date:'2022', url:'https://lafranceinsoumise.fr', ok:false},
+  ecolo:{label:'Positions des Écologistes (à confirmer dans le programme 2027)', date:'2026', url:'https://lesecologistes.fr', ok:false},
+  pp:{label:'Positions de Place publique et du PS (à confirmer pour 2027)', date:'2025–2026', url:'https://place-publique.eu', ok:false},
+  rena:{label:'Positions de Renaissance (à confirmer pour 2027)', date:'2022–2026', url:'https://parti-renaissance.fr', ok:false},
+  attalPM:{label:'Annonces de G. Attal, Premier ministre (2024), à confirmer pour 2027', date:'2024', url:'https://www.elyseescope.com/questions/gabriel-attal-programme-propositions-presidentielle-2027', ok:false},
+  rn:{label:'Programme du RN 2022 (à confirmer pour 2027)', date:'2022', url:'https://rassemblementnational.fr', ok:false},
+  horizons:{label:'Positions d’Horizons (à confirmer dans le programme 2027)', date:'2026', url:'https://horizonsleparti.fr', ok:false},
+  reconq:{label:'Programme de Reconquête 2022 (à confirmer pour 2027)', date:'2022', url:'https://www.parti-reconquete.fr', ok:false},
+};
+
+/* ============ POLICY BANK ============ */
+// [candidate, source, FR title, FR text, EN title, EN text]
+const BANK = [
+ {id:'pa', color:'#FF9F1C', fr:'Pouvoir d’achat', en:'Cost of living', on:'le pouvoir d’achat', cards:[
+  ['melenchon','esMelSmic','SMIC à 1 600 € net','Porter le salaire minimum à 1 600 € net par mois et aligner les petites retraites sur ce niveau.','€1,600 net minimum wage','Raise the minimum wage to €1,600 net a month and bring small pensions up to the same level.'],
+  ['melenchon','lfi','Bloquer les prix de l’essentiel','Bloquer les prix des produits de première nécessité, comme l’alimentation de base, l’énergie et les carburants.','Freeze prices on essentials','Freeze the prices of basic necessities such as staple food, energy and fuel.'],
+  ['lepen','esLePen','TVA réduite sur l’essentiel','Baisser la TVA sur les produits de première nécessité pour alléger les dépenses courantes des ménages.','Lower VAT on essentials','Cut VAT on basic necessities to lower households’ everyday spending.'],
+  ['lepen','rn','TVA à 5,5 % sur l’énergie','Baisser la TVA de 20 % à 5,5 % sur l’électricité, le gaz, le fioul et les carburants.','5.5% VAT on energy','Cut VAT from 20% to 5.5% on electricity, gas, heating oil and fuel.'],
+  ['philippe','euPhilippe','Travailler plus, gagner plus net','Exonérer de cotisations sociales les salariés qui acceptent de travailler davantage pour augmenter leur salaire net.','Work more, take home more','Exempt employees who choose to work more hours from social contributions, so their net pay rises.'],
+  ['zemmour','esZem1','Moins de charges, plus de net','Réduire les charges sociales et les impôts des ménages et des entreprises pour augmenter le salaire net.','Fewer payroll charges, more net pay','Cut payroll charges and taxes on households and businesses to raise take-home pay.'],
+  ['attal','attalPM','Chaque hausse de salaire doit payer','Réformer aides et cotisations pour qu’une augmentation ne soit plus en partie annulée par la baisse des aides.','Every pay rise should pay off','Reform benefits and contributions so a pay rise is no longer partly cancelled out by losing benefits.'],
+  ['glucksmann','pp','Aides publiques contre hausses de salaires','Conditionner les aides publiques aux entreprises à des hausses de salaires et à l’égalité femmes-hommes.','Public aid in exchange for raises','Make public aid to companies conditional on pay rises and gender pay equality.'],
+  ['tondelier','ecolo','Premiers kWh à prix très bas','Créer une tarification progressive de l’énergie : les premiers kilowattheures très bon marché, la surconsommation plus chère.','Cheap first kilowatt-hours','Create progressive energy pricing: the first kilowatt-hours very cheap, heavy use more expensive.'],
+ ]},
+ {id:'logement', color:'#7DF0C2', fr:'Logement', en:'Housing', on:'le logement', cards:[
+  ['melenchon','lfi','Encadrer les loyers partout','Généraliser l’encadrement des loyers dans les villes où se loger coûte trop cher, avec un objectif de baisse.','Rent caps everywhere','Extend rent caps to every city where housing is too expensive, with the aim of bringing rents down.'],
+  ['tondelier','esTon','Isoler les logements en masse','Lancer un programme national d’isolation des logements pour réduire la consommation d’énergie et les factures.','Insulate homes at scale','Launch a national home-insulation programme to cut energy use and household bills.'],
+  ['glucksmann','pp','Plus de logements sociaux','Accélérer la construction de logements sociaux et abordables, financée en partie par les plus hauts patrimoines.','More social housing','Speed up construction of social and affordable housing, partly funded by the largest fortunes.'],
+  ['attal','attalPM','Construire plus vite','Simplifier les normes de construction et compter le logement intermédiaire dans les objectifs de logement social des communes.','Build faster','Simplify building rules and count mid-market rentals towards towns’ social-housing targets.'],
+  ['lepen','rn','Priorité nationale au logement social','Attribuer en priorité les logements sociaux aux ménages de nationalité française.','National priority for social housing','Give households with French nationality priority for social housing.'],
+  ['zemmour','reconq','Fin des quotas de logements sociaux','Supprimer l’obligation pour les communes d’atteindre un quota de logements sociaux.','End social-housing quotas','Scrap the rule forcing towns to reach a quota of social housing.'],
+  ['philippe','horizons','Les maires aux commandes','Donner plus de pouvoir aux maires pour libérer du foncier et autoriser de nouvelles constructions.','Mayors in charge','Give mayors more power to free up land and approve new building.'],
+ ]},
+ {id:'climat', color:'#9BE15D', fr:'Climat & énergie', en:'Climate & energy', on:'le climat', cards:[
+  ['tondelier','esTon','Cap sur le 100 % renouvelable','Viser une énergie 100 % renouvelable d’ici 2050 avec l’éolien et le solaire, en réduisant progressivement le nucléaire.','Towards 100% renewables','Aim for 100% renewable energy by 2050 through wind and solar, while gradually reducing nuclear.'],
+  ['tondelier','ecolo','Le train plutôt que l’avion','Supprimer les vols intérieurs quand une alternative en train existe et investir massivement dans le rail.','Trains over planes','Scrap domestic flights where a train alternative exists and invest heavily in rail.'],
+  ['attal','rena','Nucléaire + renouvelables','Construire de nouveaux réacteurs nucléaires tout en accélérant les renouvelables pour une électricité bas carbone.','Nuclear plus renewables','Build new nuclear reactors while speeding up renewables for low-carbon electricity.'],
+  ['lepen','rn','Stop aux nouvelles éoliennes','Geler l’installation de nouvelles éoliennes et miser sur le nucléaire et l’hydraulique.','No new wind turbines','Freeze new wind farms and rely on nuclear and hydro power instead.'],
+  ['glucksmann','esGluZ','Un plan vert payé par les ultra-riches','Investir massivement dans la transition, financée par un impôt minimum sur les très grandes fortunes.','A green plan paid by the ultra-rich','Invest heavily in the transition, funded by a minimum tax on the very largest fortunes.'],
+  ['melenchon','esMel','La « règle verte »','Inscrire une règle verte : ne jamais prélever sur la nature plus que ce qu’elle peut reconstituer.','The “green rule”','Adopt a green rule: never take more from nature than it can regenerate.'],
+  ['zemmour','reconq','Tout miser sur le nucléaire','Construire de nombreux nouveaux réacteurs et arrêter les subventions à l’éolien et au solaire.','All in on nuclear','Build many new reactors and end subsidies for wind and solar.'],
+  ['philippe','horizons','Nucléaire et électrification','Accélérer le nouveau nucléaire et électrifier transports et industrie pour sortir des énergies fossiles.','Nuclear and electrification','Speed up new nuclear and electrify transport and industry to move off fossil fuels.'],
+ ]},
+ {id:'securite', color:'#6EA8FF', fr:'Sécurité & justice', en:'Safety & justice', on:'la sécurité', cards:[
+  ['zemmour','esZem2','Peines minimales obligatoires','Instaurer des peines minimales obligatoires pour certains délits et recruter plusieurs milliers de policiers.','Mandatory minimum sentences','Introduce mandatory minimum sentences for some offences and hire several thousand police officers.'],
+  ['philippe','esPhi','Une justice plus rapide','Accélérer les procédures judiciaires, renforcer police et gendarmerie et mieux les former.','Faster justice','Speed up court procedures, add police and gendarmerie staff and train them better.'],
+  ['melenchon','lfi','Retour de la police de proximité','Recréer une police de proximité et confier le contrôle des forces de l’ordre à une autorité indépendante.','Community policing is back','Bring back neighbourhood policing and hand oversight of the police to an independent body.'],
+  ['lepen','rn','Légitime défense pour les policiers','Créer une présomption de légitime défense pour les forces de l’ordre et durcir les peines pour les délits graves.','Self-defence presumption for police','Presume self-defence for police officers and toughen sentences for serious offences.'],
+  ['attal','attalPM','Juger vite les mineurs délinquants','Accélérer les jugements des mineurs délinquants dès 16 ans et responsabiliser davantage leurs parents.','Fast-track young offenders','Speed up trials of young offenders from age 16 and make parents more accountable.'],
+  ['tondelier','ecolo','Miser sur la prévention','Recruter des éducateurs et médiateurs de rue et renforcer la prévention dans les quartiers.','Bet on prevention','Hire youth workers and street mediators and step up prevention in neighbourhoods.'],
+  ['glucksmann','pp','Frapper les réseaux de drogue','Renforcer la police judiciaire et la saisie des avoirs criminels pour démanteler les réseaux de narcotrafic.','Hit drug networks','Strengthen criminal investigators and asset seizures to dismantle drug-trafficking networks.'],
+ ]},
+ {id:'immigration', color:'#C9B8FF', fr:'Immigration', en:'Immigration', on:'l’immigration', cards:[
+  ['lepen','esLePen','Un référendum sur l’immigration','Organiser un référendum sur l’immigration, limiter le regroupement familial et restreindre le droit d’asile.','A referendum on immigration','Hold a referendum on immigration, limit family reunification and tighten asylum rules.'],
+  ['zemmour','esZem1','Fin du droit du sol','Supprimer le droit du sol et durcir les conditions d’accès à la nationalité française.','End birthright citizenship','Abolish birthright citizenship and tighten the conditions for becoming French.'],
+  ['attal','esAttalImm','Des quotas votés chaque année','Fixer chaque année au Parlement des quotas d’immigration de travail selon les besoins des secteurs.','Yearly quotas voted by Parliament','Have Parliament set yearly work-immigration quotas based on what each sector needs.'],
+  ['tondelier','ecolo','Régulariser les travailleurs','Régulariser les travailleurs sans papiers des métiers en tension et garantir un accueil digne aux demandeurs d’asile.','Regularise workers','Grant papers to undocumented workers in short-staffed jobs and guarantee decent reception for asylum seekers.'],
+  ['melenchon','lfi','Droit de vote local pour les étrangers','Accorder le droit de vote aux élections locales aux étrangers installés durablement en France.','Local voting rights for foreigners','Let long-term foreign residents vote in local elections.'],
+  ['philippe','horizons','Visas contre expulsions','Réduire les visas accordés aux pays qui refusent de reprendre leurs ressortissants expulsés.','Visas for returns','Cut visas for countries that refuse to take back their deported nationals.'],
+  ['glucksmann','pp','Une politique d’asile européenne','Mettre en place une politique d’asile commune et solidaire entre pays européens, avec des contrôles aux frontières de l’UE.','A European asylum policy','Set up a shared, fair asylum policy across EU countries, with controls at EU borders.'],
+ ]},
+ {id:'education', color:'#FF8FB8', fr:'École', en:'Education', on:'l’école', cards:[
+  ['attal','esAttal','Des groupes de niveau','Généraliser les groupes de niveau en français et en maths et renforcer les moyens des établissements en difficulté.','Ability groups','Roll out ability groups in French and maths and give more staff to struggling schools.'],
+  ['philippe','esPhi','Des écoles plus autonomes','Donner plus d’autonomie aux établissements scolaires et mieux rémunérer les enseignants.','More autonomous schools','Give schools more autonomy and pay teachers better.'],
+  ['zemmour','reconq','Retour aux fondamentaux','Recentrer l’école sur le français, les maths et l’histoire de France, avec uniforme et plus d’autorité.','Back to basics','Refocus school on French, maths and French history, with uniforms and more discipline.'],
+  ['glucksmann','pp','Moins d’élèves par classe','Réduire le nombre d’élèves par classe et revaloriser fortement le salaire des enseignants.','Smaller classes','Cut class sizes and substantially raise teachers’ pay.'],
+  ['melenchon','lfi','École vraiment gratuite','Rendre gratuits la cantine, les fournitures et les transports scolaires.','Truly free school','Make school meals, supplies and school transport free.'],
+  ['lepen','rn','Autorité et uniforme','Généraliser l’uniforme et renforcer les sanctions contre le harcèlement et les violences à l’école.','Discipline and uniforms','Roll out school uniforms and toughen sanctions on bullying and violence at school.'],
+  ['tondelier','esTon','Le climat au programme','Intégrer le climat et le développement durable dans les programmes scolaires.','Climate on the curriculum','Put climate and sustainability on the school curriculum.'],
+ ]},
+ {id:'sante', color:'#FF6B5B', fr:'Santé', en:'Health', on:'la santé', cards:[
+  ['melenchon','lfi','100 % remboursé par la Sécu','Rembourser à 100 % les soins prescrits par la Sécurité sociale, sans passer par les mutuelles.','100% covered by public insurance','Have public health insurance cover 100% of prescribed care, with no need for top-up insurance.'],
+  ['glucksmann','pp','Réguler l’installation des médecins','Encadrer l’installation des nouveaux médecins pour lutter contre les déserts médicaux.','Regulate where doctors set up','Steer where new doctors can open practices to tackle medical deserts.'],
+  ['philippe','horizons','La santé pilotée localement','Confier davantage le pilotage du système de santé aux territoires et mieux maîtriser la dépense.','Health run locally','Give regions more control over the health system and keep spending in check.'],
+  ['tondelier','ecolo','Priorité santé-environnement','Interdire les pesticides les plus dangereux et réduire la pollution de l’air pour protéger la santé.','Environmental health first','Ban the most dangerous pesticides and cut air pollution to protect health.'],
+  ['lepen','rn','Supprimer les ARS','Supprimer les agences régionales de santé et redéployer les moyens vers le recrutement de soignants.','Abolish regional health agencies','Scrap regional health agencies and redirect the money to hiring care staff.'],
+  ['attal','attalPM','Les rendez-vous manqués payants','Faire payer une petite pénalité aux patients qui manquent un rendez-vous médical sans prévenir.','Pay for missed appointments','Charge a small fee to patients who miss a medical appointment without notice.'],
+  ['zemmour','reconq','Supprimer l’AME','Supprimer l’aide médicale d’État qui finance les soins des étrangers en situation irrégulière.','Abolish state medical aid','Scrap the state medical aid that covers care for undocumented foreigners.'],
+ ]},
+ {id:'retraites', color:'#FFB38A', fr:'Retraites', en:'Pensions', on:'les retraites', cards:[
+  ['melenchon','bdor','Retour à 60 ans par étapes','Revenir d’abord à 62 ans, puis à 60 ans avec 40 années de cotisation.','Back to 60, step by step','Go back to 62 first, then to 60 with 40 years of contributions.'],
+  ['lepen','bdor','62 ans, 60 pour les carrières longues','Fixer l’âge légal à 62 ans et permettre de partir à 60 ans à ceux qui ont commencé à travailler avant 20 ans.','62, or 60 for early starters','Set the legal age at 62, and let people who started work before 20 retire at 60.'],
+  ['philippe','euPhilippe','65 ans et un peu de capitalisation','Reculer progressivement l’âge légal à 65 ans et ajouter une part d’épargne retraite collective.','65 plus some funded pensions','Gradually raise the legal age to 65 and add a collective pension-savings layer.'],
+  ['glucksmann','psRet','Abroger 64 ans, compter la pénibilité','Abroger la réforme de 2023 et adapter la durée de cotisation à la pénibilité des métiers.','Repeal 64, account for hard jobs','Repeal the 2023 reform and adjust contribution years to how physically hard each job is.'],
+  ['tondelier','bdor','Retour immédiat à 62 ans','Revenir tout de suite à 62 ans, puis viser 60 ans en priorité pour les carrières longues.','Back to 62 right away','Return to 62 immediately, then aim for 60 starting with long careers.'],
+  ['zemmour','reconq','64 ans, petites pensions revalorisées','Fixer l’âge de départ à 64 ans tout en revalorisant les petites pensions.','64, with higher small pensions','Set retirement at 64 while raising the smallest pensions.'],
+ ]},
+ {id:'travail', color:'#4FD1E8', fr:'Travail & emploi', en:'Work & jobs', on:'le travail', cards:[
+  ['philippe','euPhilippe','Chômage limité à 12 mois','Limiter l’indemnisation du chômage à 12 mois pour les moins de 50 ans.','Jobless benefits capped at 12 months','Cap unemployment benefits at 12 months for people under 50.'],
+  ['melenchon','esMel','Semaine de 32 heures','Réduire progressivement le temps de travail vers la semaine de 32 heures.','32-hour week','Gradually cut working time towards a 32-hour week.'],
+  ['tondelier','ecolo','La semaine de 4 jours','Encourager la semaine de 4 jours sans perte de salaire pour mieux partager le travail.','4-day week','Encourage a 4-day week with no pay cut to share work more fairly.'],
+  ['lepen','rn','Des hausses de salaire sans charges','Exonérer de cotisations patronales les entreprises qui augmentent les salaires de 10 %.','Pay rises without payroll tax','Exempt companies that raise wages by 10% from employer contributions on that raise.'],
+  ['attal','attalPM','Un chômage plus incitatif','Durcir les règles de l’assurance chômage pour inciter à reprendre plus vite un emploi.','Tougher jobless rules','Tighten unemployment insurance rules to push people back into work faster.'],
+  ['glucksmann','pp','Les salariés au conseil','Donner aux salariés beaucoup plus de sièges dans les conseils d’administration des grandes entreprises.','Workers on the board','Give employees many more seats on the boards of large companies.'],
+ ]},
+ {id:'impots', color:'#E4F26B', fr:'Impôts & dette', en:'Taxes & debt', on:'les impôts', cards:[
+  ['glucksmann','esGluZ','Taxe Zucman','Créer un impôt minimum de 2 % sur les patrimoines de plus de 100 millions d’euros.','Zucman tax','Create a 2% minimum tax on fortunes above €100 million.'],
+  ['melenchon','lfi','Retour de l’ISF et 14 tranches','Rétablir l’impôt sur la fortune et créer 14 tranches d’impôt sur le revenu pour mieux répartir l’effort.','Wealth tax back, 14 brackets','Bring back the wealth tax and create 14 income-tax brackets to spread the burden.'],
+  ['philippe','euPhilippe','Moins de dépenses publiques','Réduire fortement la dépense publique, notamment en ne remplaçant pas un fonctionnaire sur trois.','Less public spending','Cut public spending sharply, including not replacing one civil servant in three.'],
+  ['lepen','rn','Zéro impôt sur le revenu avant 30 ans','Exonérer d’impôt sur le revenu les jeunes actifs de moins de 30 ans.','No income tax under 30','Exempt working people under 30 from income tax.'],
+  ['zemmour','reconq','Transmettre sans être taxé','Alléger fortement les droits de succession et de donation pour les familles.','Pass it on tax-free','Sharply cut inheritance and gift taxes for families.'],
+  ['attal','attalPM','Baisser l’impôt des classes moyennes','Baisser l’impôt sur le revenu des classes moyennes, financé par des économies.','Tax cut for the middle class','Cut income tax for middle-class households, funded by savings.'],
+  ['tondelier','ecolo','ISF climatique','Créer un impôt sur la fortune qui tient compte de l’empreinte carbone des patrimoines.','Climate wealth tax','Create a wealth tax that factors in the carbon footprint of assets.'],
+ ]},
+ {id:'europe', color:'#8FA8FF', fr:'Europe & monde', en:'Europe & world', on:'l’Europe', cards:[
+  ['glucksmann','esEurope','L’Ukraine dans l’UE d’ici 2030','Élargir l’Union européenne à l’Ukraine et aux Balkans d’ici 2030.','Ukraine in the EU by 2030','Enlarge the EU to Ukraine and the Western Balkans by 2030.'],
+  ['philippe','philKiev','L’Ukraine dans l’OTAN','Soutenir l’entrée de l’Ukraine dans l’OTAN et des troupes européennes sur place une fois la paix revenue.','Ukraine in NATO','Back Ukraine joining NATO and European troops on the ground once peace returns.'],
+  ['melenchon','esForeign','Quitter le commandement de l’OTAN','Sortir du commandement intégré de l’OTAN tout en restant membre de l’Alliance.','Leave NATO’s command','Leave NATO’s integrated command while staying in the Alliance.'],
+  ['lepen','esForeignRN','Non à l’élargissement de l’OTAN','Rester dans l’OTAN mais s’opposer à tout nouvel élargissement, notamment à l’Ukraine.','No NATO enlargement','Stay in NATO but oppose any further enlargement, including Ukraine.'],
+  ['zemmour','reconq','Le droit français d’abord','Faire primer le droit français sur le droit européen.','French law first','Make French law take precedence over EU law.'],
+  ['attal','attalAgri','Non au Mercosur en l’état','Refuser l’accord commercial entre l’UE et le Mercosur tant qu’il ne protège pas les agriculteurs.','No to Mercosur as is','Reject the EU–Mercosur trade deal as long as it doesn’t protect farmers.'],
+  ['tondelier','ecolo','Une défense européenne','Construire une défense européenne commune et une Europe plus fédérale.','A European defence','Build a common European defence and a more federal Europe.'],
+ ]},
+ {id:'institutions', color:'#F2B8FF', fr:'Démocratie', en:'Democracy', on:'la démocratie', cards:[
+  ['melenchon','esInstit','Une VIe République','Convoquer une Assemblée constituante et créer le référendum d’initiative citoyenne.','A Sixth Republic','Convene a constituent assembly and create citizen-initiated referendums.'],
+  ['glucksmann','esInstit','Limiter les pouvoirs du président','Réunir une convention démocratique pour réformer la Ve République et réduire les pouvoirs présidentiels.','Limit presidential powers','Hold a democratic convention to reform the Fifth Republic and curb presidential powers.'],
+  ['philippe','esInstit','Garder la Constitution, mieux l’appliquer','Ne pas changer de Constitution mais mieux appliquer celle de la Ve République.','Keep the constitution, use it better','Keep the current constitution and apply it better rather than write a new one.'],
+  ['tondelier','ecoloRep','Fin du présidentialisme','Fonder une « République écologique et citoyenne » qui met fin au présidentialisme et garantit l’indépendance de la justice.','End presidential rule','Found an “ecological and citizen republic” that ends presidential dominance and secures judicial independence.'],
+  ['lepen','rn','Proportionnelle et RIC','Instaurer la proportionnelle aux législatives et le référendum d’initiative citoyenne.','Proportional vote and citizen referendums','Bring in proportional representation for parliament and citizen-initiated referendums.'],
+  ['zemmour','reconq','Des référendums réguliers','Consulter régulièrement les Français par référendum sur les grands sujets de société.','Regular referendums','Regularly consult the French by referendum on major social issues.'],
+ ]},
+];
+const CARD = {};
+BANK.forEach((th,ti)=>{
+  th.cards = th.cards.map((r,ci)=>{ const c={id:th.id+'_'+ci, ti, c:r[0], s:r[1], fr:[r[2],r[3]], en:[r[4],r[5]]}; CARD[c.id]=c; return c; });
+  th.cands = [...new Set(th.cards.map(c=>c.c))];
+});
+const N_CARDS = Object.keys(CARD).length;
+
+const SLOGANS = {
+  pa:{fr:['Remplir le frigo, pas les promesses.','Ton salaire, ma priorité.','Le pouvoir d’achat, maintenant.'],en:['Fill fridges, not promises.','Your paycheck, my priority.','Cost of living, fixed now.']},
+  logement:{fr:['Un toit, c’est un droit.','Des clés pour tout le monde.','Moins de loyer, plus de vie.'],en:['A home is a right.','Keys for everyone.','Less rent, more life.']},
+  climat:{fr:['Le futur n’attend pas.','Une planète, zéro excuse.','Chaud devant : on agit.'],en:['The future won’t wait.','One planet, no excuses.','Heat’s on. So are we.']},
+  securite:{fr:['Rentrer tard sans peur.','Vivre tranquille, partout.','La sécurité, sans détour.'],en:['Walk home late, no fear.','Peace of mind, everywhere.','Safety, straight up.']},
+  immigration:{fr:['Des règles claires pour tous.','Accueillir, décider, assumer.','Une frontière, des principes.'],en:['Clear rules for everyone.','Welcome, decide, own it.','Borders and principles.']},
+  education:{fr:['L’école d’abord.','Chaque élève compte.','Apprendre, c’est le pouvoir.'],en:['School comes first.','Every pupil counts.','Learning is power.']},
+  sante:{fr:['Un médecin pour chacun.','Ta santé avant tout.','Soigner partout, pour tous.'],en:['A doctor for everyone.','Your health first.','Care everywhere, for all.']},
+  retraites:{fr:['Une retraite digne, pas un mirage.','Le temps de vivre, enfin.','Travailler juste, partir serein.'],en:['A decent pension, not a mirage.','Time to live, at last.','Work fair, retire easy.']},
+  travail:{fr:['Le travail doit payer.','Bosser mieux, vivre mieux.','Un job, un vrai salaire.'],en:['Work has to pay.','Work better, live better.','A job, a real wage.']},
+  impots:{fr:['Chaque euro compte.','Des impôts justes, enfin.','Payer moins, payer mieux.'],en:['Every euro counts.','Fair taxes, finally.','Pay less, pay smarter.']},
+  europe:{fr:['Plus forts ensemble.','La France debout dans le monde.','Notre voix compte, partout.'],en:['Stronger together.','France standing tall.','Our voice counts, everywhere.']},
+  institutions:{fr:['Le pouvoir au peuple.','Une démocratie qui écoute.','Ta voix, vraiment.'],en:['Power to the people.','A democracy that listens.','Your voice, for real.']},
+};
+const FIRST = ['Léa','Noah','Inès','Sacha','Camille','Yanis','Lou','Adam','Jade','Malik','Chloé','Théo','Nour','Eden','Maël','Alix','Zoé','Ilyes','Romane','Kenza'];
+const LAST = ['Morel','Benali','Fontaine','Diallo','Laurent','Nguyen','Moreau','Haddad','Lefèvre','Traoré','Garnier','Rossi','Petit','Mercier','Barbier','Da Silva','Roux','Kaya'];
+const SKINS = ['#FBD9B9','#EDB98A','#D49464','#AE6B3E','#7E4A26','#4E2D18'];
+const HAIRC = ['#1E1A22','#5A3825','#B8732E','#E9C766','#FF4F9A','#3D5AFE'];
+const N_HAIR = 6, N_ACC = 6;
+
+/* ============ SEEDED DECK ============ */
+// A round = 7 themes drawn from the bank, 4 candidates per theme, each candidate exactly 4 times.
+// The deck is fully determined by its seed, so a friend opening your link plays the same cards.
+function mulberry(seed){ let a=seed>>>0; return ()=>{ a=(a+0x6D2B79F5)|0; let t=Math.imul(a^(a>>>15),1|a); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; }; }
+function buildDeck(seed){
+  const R = mulberry(seed), ri = n=>Math.floor(R()*n);
+  const shuffle = a=>{ for(let i=a.length-1;i>0;i--){ const j=ri(i+1); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+  for(let attempt=0; attempt<400; attempt++){
+    const tis = shuffle(BANK.map((_,i)=>i)).slice(0, ROUND_THEMES);
+    const quota = Object.fromEntries(CAND_IDS.map(c=>[c, PER_CAND]));
+    const chosen = {}; let ok = true;
+    const order = [...tis].sort((a,b)=>BANK[a].cands.length-BANK[b].cands.length);
+    for(const ti of order){
+      const avail = shuffle(BANK[ti].cands.filter(c=>quota[c]>0)).sort((a,b)=>quota[b]-quota[a]);
+      if(avail.length < PER_THEME){ ok=false; break; }
+      chosen[ti] = avail.slice(0, PER_THEME); chosen[ti].forEach(c=>quota[c]--);
+    }
+    if(!ok) continue;
+    return { themes:tis, cards: tis.map(ti=>chosen[ti].map(c=>{ const opts = BANK[ti].cards.filter(x=>x.c===c); return opts[ri(opts.length)].id; })) };
+  }
+  const tis = BANK.map((_,i)=>i).slice(0, ROUND_THEMES);
+  return { themes:tis, cards: tis.map(ti=>BANK[ti].cards.slice(0, PER_THEME).map(c=>c.id)) };
+}
+const newSeed = ()=> Math.floor(Math.random()*2147483646)+1;
+
+/* ============ I18N ============ */
+const T = {
+  fr:{
+    brand:'Ton candidat idéal', start:'Je construis mon candidat', how:'Comment ça marche', kicker:'Présidentielle 2027',
+    h1a:'Construis', h1b:'ton candidat', h1c:'idéal',
+    lead:'Choisis des mesures réelles, sans voir qui les propose. Ton candidat prend vie. Ensuite on te révèle de qui il est vraiment fait.',
+    stats:[['7','candidats'],[String(BANK.length),'thèmes'],[String(N_CARDS),'mesures'],['3','minutes'],['0','compte']],
+    statsNote:'Chaque partie tire 7 thèmes et 28 mesures au hasard : rejoue, tu tombes sur d’autres questions.',
+    stepsT:'Trois étapes', steps:[['Choisis à l’aveugle','Un tap sur la mesure qui te parle, et on passe au thème suivant. Aucun nom, aucun logo.'],['Crée ton perso','Ton candidat fictif prend vie : avatar, nom, slogan et affiche de campagne.'],['La révélation','Ton affiche montre de quels vrais candidats ton candidat est fait.']],
+    themesT:'Les thèmes en jeu',
+    socialT:'Plus drôle à plusieurs', matchT:'Un seul lien', matchP:'Tes amis devinent qui domine ton mix, puis jouent les mêmes cartes que toi. À la fin : votre compatibilité.',
+    matchDemo:'compatibles', matchDemo2:'D’accord sur l’école · opposés sur le logement',
+    guessT:'Devine mon candidat', guessP:'Ton affiche arrive sans les pourcentages. Ton pote doit deviner qui se cache derrière.', guessQ:'Qui domine le mix de Léa ?',
+    unlikeT:'Pourquoi c’est différent',
+    unlike:[['Pas un quiz','Tu ne remplis pas un questionnaire : tu crées quelque chose que tu as envie de montrer.'],['Les idées avant les noms','Les mesures sont anonymes jusqu’à la fin. Pas d’étiquette, pas de tribu.'],['Tout est sourcé','Chaque mesure renvoie à sa source et la méthode de calcul est publique.']],
+    codeL:'Un ami t’a envoyé un lien ? Colle-le ici', open:'Ouvrir', badCode:'Ce lien ne contient pas de candidat. Vérifie que tu l’as copié en entier.',
+    footL:'Projet étudiant · Product Management in the Age of AI 2026', demo:'Données de démonstration : chaque mesure est à vérifier avant diffusion.',
+    level:'Niveau', prompt:'Touche la mesure qui te parle le plus.', measure:'Mesure', chosen:'CHOISIE',
+    source:'Source', hideSource:'Masquer la source', toConfirm:'à confirmer', sourced:'sourcée',
+    none:'Aucune de ces mesures', skip:'Passer ce thème', back:'Retour',
+    creatorT:'Crée ton candidat', hair:'Coiffure', hairColor:'Couleur', skin:'Peau', acc:'Accessoire', random:'Au hasard',
+    accN:['Aucun','Lunettes','Solaires','Béret','Boucles','Casque'], hairN:['Courte','Afro','Longue','Chignon','Rasée','Banane'],
+    nameL:'Son nom', newName:'Autre nom', combatL:'Son combat n°1', sloganL:'Son slogan', newSlogan:'Autre', seePoster:'Révéler mon candidat',
+    save:'Enregistrer l’affiche', saveHint:'Appuie longuement sur l’image (ou clic droit) pour l’enregistrer, puis poste-la en story.', close:'Fermer',
+    revealT:'Ton candidat est fait de…', noPick:'Tu n’as choisi aucune mesure : ton candidat est 100 % indépendant.',
+    shareT:'Défie tes amis', shareP:'Un seul lien : ils devinent qui domine ton mix, jouent les mêmes cartes et découvrent votre compatibilité.',
+    shareBtn:'Copier mon lien', copied:'Lien copié ! Colle-le dans ta conversation.', copyFail:'Copie impossible ici : sélectionne le lien affiché.',
+    shareMsg:'J’ai créé mon candidat idéal pour 2027. Devine qui domine mon mix, puis fais le tien pour voir si on est compatibles :',
+    detailT:'Le détail de mon mix', badgesT:'Tes badges', breakdownT:'Thème par thème', skipped:'Passé', noneOf:'Aucune',
+    again:'Rejouer avec d’autres questions', edit:'Modifier mon candidat',
+    compatT:'Ta compatibilité avec', agreeOn:'D’accord sur', opposeOn:'opposés sur', fullAgree:'D’accord sur tout ce que vous avez répondu tous les deux', noOverlap:'Pas assez de thèmes en commun pour comparer',
+    guessTitle:'Devine le candidat de', guessPrompt:'Quel vrai candidat domine son mix ?', right:'Bien vu !', wrong:'Raté !',
+    challenge:'À ton tour : mêmes cartes, ton candidat', challengeP:'Tu vas jouer exactement les mêmes mesures. À la fin, vous verrez votre compatibilité.',
+    badges:{
+      free:['Esprit libre','Ton mix mélange au moins 4 candidats'],
+      line:['Ligne claire','Plus de 60 % viennent d’un seul candidat'],
+      noLabel:['Sans étiquette','Tu as rejeté toutes les mesures d’un thème'],
+      curious:['Curieux·se','Tu as ouvert au moins 3 sources'],
+      complete:['Grand chelem','Tu as répondu aux 7 thèmes'],
+    },
+    howT:'Comment ça marche',
+    howB:[
+      ['Une banque de mesures', `La base contient ${N_CARDS} mesures sur ${BANK.length} thèmes, issues des déclarations, interviews ou programmes des candidats. À chaque partie, 7 thèmes sont tirés au sort, et pour chacun 4 candidats et une de leurs mesures.`],
+      ['Équité entre candidats','Le tirage garantit que chaque candidat apparaît exactement 4 fois par partie. Personne n’a plus de chances qu’un autre d’entrer dans ton mix.'],
+      ['Une réécriture neutre','Chaque mesure est reformulée en français simple, avec une longueur et un ton comparables, sans nom, sans logo et sans vocabulaire partisan. L’ordre des cartes est mélangé.'],
+      ['Le calcul des pourcentages','Chaque mesure choisie compte pour un point pour le candidat qui la porte. Les pourcentages sont la part de chaque candidat dans tes choix. « Aucune » et « Passer » ne comptent pour personne.'],
+      ['La compatibilité','Ton ami joue les mêmes cartes que toi. Moitié du score : la part des thèmes où vous avez fait le même choix. Moitié : la proximité de vos deux mix.'],
+      ['Ta vie privée','Pas de compte, pas de cookie, pas de serveur : tes réponses restent dans ton navigateur. Quand tu partages, tes choix sont encodés dans le lien lui-même et rien n’est stocké ailleurs.'],
+    ],
+    demoNote:'Version de démonstration. Les candidatures et les programmes 2027 évoluent encore : les mesures marquées « à confirmer » reprennent des positions antérieures et doivent être vérifiées avant toute diffusion publique.',
+    allSources:'Voir toute la banque de mesures et ses sources (révèle les candidats)',
+    posterKicker:'PRÉSIDENTIELLE 2027', posterFict:'CANDIDAT·E FICTIF·VE', posterVote:'VOTEZ', posterMix:'MON MIX', posterPrio:'MES PRIORITÉS', posterFoot:'TON CANDIDAT IDÉAL · CONSTRUIS LE TIEN', posterIndep:'100 % INDÉPENDANT',
+  },
+  en:{
+    brand:'Your ideal candidate', start:'Build my candidate', how:'How it works', kicker:'French election 2027',
+    h1a:'Build', h1b:'your ideal', h1c:'candidate',
+    lead:'Pick real policies without seeing who proposes them. Your candidate comes to life. Then we reveal who they are really made of.',
+    stats:[['7','candidates'],[String(BANK.length),'themes'],[String(N_CARDS),'policies'],['3','minutes'],['0','sign-ups']],
+    statsNote:'Every round draws 7 themes and 28 policies at random: play again and you get different questions.',
+    stepsT:'Three steps', steps:[['Pick blind','Tap the policy that speaks to you and you jump to the next theme. No names, no logos.'],['Create your character','Your fictional candidate comes to life: avatar, name, slogan and campaign poster.'],['The reveal','Your poster shows which real candidates your candidate is made of.']],
+    themesT:'Themes in play',
+    socialT:'Better with friends', matchT:'One single link', matchP:'Friends guess who dominates your mix, then play the same cards as you. At the end: your compatibility.',
+    matchDemo:'compatible', matchDemo2:'Agree on education · opposites on housing',
+    guessT:'Guess my candidate', guessP:'Your poster arrives without percentages. Your friend has to guess who’s behind it.', guessQ:'Who dominates Léa’s mix?',
+    unlikeT:'Why it’s different',
+    unlike:[['Not a quiz','You don’t fill in a questionnaire: you create something you want to show off.'],['Ideas before names','Policies stay anonymous until the end. No labels, no tribes.'],['Everything is sourced','Every policy links to its source and the scoring method is public.']],
+    codeL:'Got a link from a friend? Paste it here', open:'Open', badCode:'This link doesn’t contain a candidate. Check that you copied all of it.',
+    footL:'Student project · Product Management in the Age of AI 2026', demo:'Demo data: every policy must be checked before public release.',
+    level:'Level', prompt:'Tap the policy that speaks to you most.', measure:'Policy', chosen:'PICKED',
+    source:'Source', hideSource:'Hide source', toConfirm:'to confirm', sourced:'sourced',
+    none:'None of these', skip:'Skip this theme', back:'Back',
+    creatorT:'Create your candidate', hair:'Hair', hairColor:'Colour', skin:'Skin', acc:'Accessory', random:'Randomise',
+    accN:['None','Glasses','Shades','Beret','Earrings','Headset'], hairN:['Short','Afro','Long','Bun','Buzz','Quiff'],
+    nameL:'Their name', newName:'New name', combatL:'Their #1 fight', sloganL:'Their slogan', newSlogan:'Another', seePoster:'Reveal my candidate',
+    save:'Save the poster', saveHint:'Long-press the image (or right-click) to save it, then post it as a story.', close:'Close',
+    revealT:'Your candidate is made of…', noPick:'You picked no policies: your candidate is 100% independent.',
+    shareT:'Challenge your friends', shareP:'One link: they guess who dominates your mix, play the same cards and see your compatibility.',
+    shareBtn:'Copy my link', copied:'Link copied! Paste it in your chat.', copyFail:'Can’t copy here: select the link shown.',
+    shareMsg:'I built my ideal candidate for 2027. Guess who dominates my mix, then build yours to see if we match:',
+    detailT:'My mix in detail', badgesT:'Your badges', breakdownT:'Theme by theme', skipped:'Skipped', noneOf:'None',
+    again:'Play again with new questions', edit:'Edit my candidate',
+    compatT:'Your compatibility with', agreeOn:'Agree on', opposeOn:'opposites on', fullAgree:'You agree on everything you both answered', noOverlap:'Not enough shared themes to compare',
+    guessTitle:'Guess the candidate of', guessPrompt:'Which real candidate dominates their mix?', right:'Nailed it!', wrong:'Nope!',
+    challenge:'Your turn: same cards, your candidate', challengeP:'You’ll play exactly the same policies. At the end you’ll see your compatibility.',
+    badges:{
+      free:['Free spirit','Your mix blends at least 4 candidates'],
+      line:['Clear line','Over 60% comes from one candidate'],
+      noLabel:['No label','You rejected every policy in a theme'],
+      curious:['Curious','You opened at least 3 sources'],
+      complete:['Grand slam','You answered all 7 themes'],
+    },
+    howT:'How it works',
+    howB:[
+      ['A policy bank', `The bank holds ${N_CARDS} policies across ${BANK.length} themes, taken from candidates’ statements, interviews or programmes. Each round draws 7 themes, and for each one 4 candidates and one of their policies.`],
+      ['Fair to every candidate','The draw guarantees each candidate appears exactly 4 times per round, so nobody has a better chance of entering your mix.'],
+      ['Neutral rewriting','Each policy is rewritten in plain language with similar length and tone, with no names, logos or party jargon. Card order is shuffled.'],
+      ['How percentages work','Each policy you pick gives one point to the candidate behind it. Percentages are each candidate’s share of your picks. “None” and “Skip” count for nobody.'],
+      ['Compatibility','Your friend plays the same cards as you. Half the score: the share of themes where you made the same pick. Half: how close your two mixes are.'],
+      ['Your privacy','No account, no cookies, no server: your answers stay in your browser. When you share, your picks are encoded in the link itself and stored nowhere else.'],
+    ],
+    demoNote:'Demo version. 2027 candidacies and programmes are still moving: policies marked “to confirm” come from earlier positions and must be checked before any public release.',
+    allSources:'See the whole policy bank and its sources (reveals the candidates)',
+    posterKicker:'FRENCH ELECTION 2027', posterFict:'FICTIONAL CANDIDATE', posterVote:'VOTE', posterMix:'MY MIX', posterPrio:'MY PRIORITIES', posterFoot:'YOUR IDEAL CANDIDATE · BUILD YOURS', posterIndep:'100% INDEPENDENT',
+  }
+};
+
+/* ============ STATE ============ */
+const S = {
+  lang:'fr', view:'landing', ti:0, xp:0, srcOpened:new Set(), openSrc:new Set(), lock:false,
+  seed:0, deck:null, choices:Array(ROUND_THEMES).fill(null), order:[],
+  av:null, first:0, last:0, name:'', combat:0, slogan:0,
+  friend:null, guessed:null, revealed:false,
+};
+const t = k => T[S.lang][k];
+const L = obj => obj[S.lang];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rnd = n => Math.floor(Math.random()*n);
+const app = document.getElementById('app');
+const themeAt = (deck, i) => BANK[deck.themes[i]];
+
+function randomAvatar(){ return {hair:rnd(N_HAIR), hc:rnd(HAIRC.length), skin:rnd(SKINS.length), acc:rnd(N_ACC)}; }
+function shuffleOrders(){
+  S.order = S.deck.cards.map(list => { const a=[...list]; for(let i=a.length-1;i>0;i--){ const j=rnd(i+1); [a[i],a[j]]=[a[j],a[i]]; } return a; });
+}
+
+/* ============ MIX / SCORING ============ */
+function mixOf(choices){
+  const counts = Object.fromEntries(CAND_IDS.map(id=>[id,0]));
+  let total = 0;
+  choices.forEach(ch => { if(ch && CARD[ch]){ counts[CARD[ch].c]++; total++; } });
+  const floors = CAND_IDS.map(id=>{ const p = total ? counts[id]*100/total : 0; return {id, n:counts[id], f:Math.floor(p), rem:p-Math.floor(p)}; });
+  let left = total ? 100 - floors.reduce((s,r)=>s+r.f,0) : 0;
+  [...floors].sort((a,b)=>b.rem-a.rem).forEach(r=>{ if(left>0 && r.rem>0){ r.f++; left--; } });
+  const list = floors.map(r=>({id:r.id, n:r.n, pct:r.f, share: total ? r.n/total : 0}));
+  list.sort((a,b)=> b.n-a.n || CANDS[a.id].axis-CANDS[b.id].axis);
+  return {list, total};
+}
+function compat(a, b){
+  let same=0, both=0; const diffs=[]; const agrees=[];
+  for(let i=0;i<ROUND_THEMES;i++){
+    const x=a[i], y=b[i];
+    if(!x || !y || x==='s' || y==='s') continue;
+    both++;
+    if(x===y){ same++; agrees.push(i); }
+    else {
+      const ax = x==='n' ? 3 : CANDS[CARD[x].c].axis, ay = y==='n' ? 3 : CANDS[CARD[y].c].axis;
+      diffs.push({i, d:Math.abs(ax-ay) + (x==='n'||y==='n' ? .5 : 0)});
+    }
+  }
+  if(!both) return null;
+  const ma = mixOf(a), mb = mixOf(b);
+  let l1 = 0; CAND_IDS.forEach(id=>{ l1 += Math.abs((ma.list.find(r=>r.id===id)||{}).share - (mb.list.find(r=>r.id===id)||{}).share); });
+  const mixSim = (ma.total && mb.total) ? 1 - l1/2 : (ma.total===mb.total ? 1 : 0);
+  diffs.sort((p,q)=>q.d-p.d);
+  return {score: Math.round(100*(.5*same/both + .5*mixSim)), agree: agrees[0], oppose: diffs.length ? diffs[0].i : null};
+}
+
+/* ============ LINK ENCODING ============ */
+// c-<seed36>-<7 picks: 0-3 index in deck list | n | s>-<hair,hc,skin,acc,combat,slogan>-<name>
+function encChoices(deck, ch){ return ch.map((c,i)=> !c || c==='s' ? 's' : c==='n' ? 'n' : String(deck.cards[i].indexOf(c))).join(''); }
+function decChoices(deck, s){ return [...s].map((x,i)=> x==='s' ? 's' : x==='n' ? 'n' : deck.cards[i][+x]); }
+function encName(s){ return encodeURIComponent(s).replace(/[!'()*~\-]/g, c=>'%'+c.charCodeAt(0).toString(16).toUpperCase()).replace(/%/g,'~'); }
+function decName(s){ try{ return decodeURIComponent(s.replace(/~/g,'%')).slice(0,28); }catch(e){ return null; } }
+function makeToken(){
+  const av = [S.av.hair,S.av.hc,S.av.skin,S.av.acc,S.combat,S.slogan].join('');
+  return `c-${S.seed.toString(36)}-${encChoices(S.deck, S.choices)}-${av}-${encName(S.name)}`;
+}
+function parseToken(tok){
+  const m = /^c-([0-9a-z]{1,7})-([0-3ns]{7})-([0-9]{6})-([A-Za-z0-9._~]{1,200})$/.exec(tok||'');
+  if(!m) return null;
+  const seed = parseInt(m[1],36); const deck = buildDeck(seed);
+  const choices = decChoices(deck, m[2]); const d = m[3].split('').map(Number); const name = decName(m[4]);
+  if(choices.some(c=>c===undefined) || !name) return null;
+  if(d[0]>=N_HAIR || d[1]>=HAIRC.length || d[2]>=SKINS.length || d[3]>=N_ACC || d[4]>6 || d[5]>2) return null;
+  return {seed, deck, choices, av:{hair:d[0],hc:d[1],skin:d[2],acc:d[3]}, combat:d[4], slogan:d[5], name};
+}
+function shareLink(){ return (ARTIFACT_URL || location.href.split('#')[0]) + '#' + makeToken(); }
+
+/* ============ CANVAS: AVATAR ============ */
+const INK = '#15131C';
+function drawAvatar(ctx, cx, cy, s, a, outfit){
+  const lw = Math.max(2, s*0.022), r = s*0.2, hx = cx, hy = cy - s*0.07;
+  const skin = SKINS[a.skin], hair = HAIRC[a.hc];
+  ctx.save();
+  ctx.lineJoin='round'; ctx.lineCap='round'; ctx.lineWidth=lw; ctx.strokeStyle=INK;
+  const fs = fill=>{ ctx.fillStyle=fill; ctx.fill(); ctx.stroke(); };
+  if(a.hair===1){ ctx.beginPath(); ctx.arc(hx, hy-r*0.2, r*1.5, 0, Math.PI*2); fs(hair); }
+  if(a.hair===2){ ctx.beginPath(); ctx.roundRect(hx-r*1.18, hy-r*0.7, r*2.36, r*2.35, [r*1.1, r*1.1, r*0.35, r*0.35]); fs(hair); }
+  if(a.hair===3){ ctx.beginPath(); ctx.arc(hx, hy-r*1.28, r*0.52, 0, Math.PI*2); fs(hair); }
+  ctx.beginPath(); ctx.rect(hx-r*0.34, hy+r*0.7, r*0.68, s*0.2); fs(skin);
+  ctx.beginPath(); ctx.ellipse(cx, cy+s*0.52, s*0.37, s*0.3, 0, Math.PI, Math.PI*2); ctx.closePath(); fs(outfit);
+  ctx.beginPath(); ctx.moveTo(hx-r*0.55, cy+s*0.23); ctx.lineTo(hx, cy+s*0.33); ctx.lineTo(hx+r*0.55, cy+s*0.23); ctx.closePath(); fs('#FFFFFF');
+  [-1,1].forEach(k=>{ ctx.beginPath(); ctx.arc(hx+k*r*0.93, hy+r*0.12, r*0.2, 0, Math.PI*2); fs(skin); });
+  if(a.acc===4){ [-1,1].forEach(k=>{ ctx.beginPath(); ctx.arc(hx+k*r*0.98, hy+r*0.42, r*0.1, 0, Math.PI*2); fs('#FFD83D'); }); }
+  ctx.beginPath(); ctx.ellipse(hx, hy, r*0.95, r*1.08, 0, 0, Math.PI*2); fs(skin);
+  ctx.beginPath();
+  if(a.hair===4){
+    ctx.ellipse(hx, hy-r*0.38, r*0.96, r*0.72, 0, Math.PI*1.04, Math.PI*1.96);
+    ctx.quadraticCurveTo(hx, hy-r*0.62, hx-r*0.92, hy-r*0.48); ctx.closePath(); ctx.globalAlpha=.85; fs(hair); ctx.globalAlpha=1;
+  } else {
+    const lift = a.hair===1 ? 0.15 : 0;
+    ctx.ellipse(hx, hy-r*(0.3+lift), r*1.02, r*(0.88+lift), 0, Math.PI, Math.PI*2);
+    if(a.hair===5){ ctx.lineTo(hx+r*1.02, hy-r*0.3); ctx.quadraticCurveTo(hx+r*0.2, hy-r*0.5, hx-r*0.4, hy-r*0.12); ctx.quadraticCurveTo(hx-r*0.8, hy-r*0.4, hx-r*1.02, hy-r*0.3); }
+    else { ctx.quadraticCurveTo(hx+r*0.35, hy-r*0.02, hx-r*0.1, hy-r*0.32); ctx.quadraticCurveTo(hx-r*0.6, hy-r*0.1, hx-r*1.02, hy-r*0.3); }
+    ctx.closePath(); fs(hair);
+    if(a.hair===5){ ctx.beginPath(); ctx.moveTo(hx-r*0.7, hy-r*0.95); ctx.quadraticCurveTo(hx+r*0.1, hy-r*1.75, hx+r*0.95, hy-r*1.0); ctx.quadraticCurveTo(hx+r*0.2, hy-r*1.2, hx-r*0.7, hy-r*0.95); ctx.closePath(); fs(hair); }
+    if(a.hair===2){ [-1,1].forEach(k=>{ ctx.beginPath(); ctx.roundRect(hx+k*r*0.98-(k>0?r*0.26:0), hy-r*0.35, r*0.26, r*1.35, r*0.13); fs(hair); }); }
+  }
+  ctx.fillStyle=INK;
+  [-1,1].forEach(k=>{ ctx.beginPath(); ctx.arc(hx+k*r*0.36, hy+r*0.12, r*0.09, 0, Math.PI*2); ctx.fill(); });
+  ctx.beginPath(); ctx.arc(hx, hy+r*0.36, r*0.3, Math.PI*0.18, Math.PI*0.82); ctx.stroke();
+  ctx.globalAlpha=.45; ctx.fillStyle='#FF4F9A';
+  [-1,1].forEach(k=>{ ctx.beginPath(); ctx.arc(hx+k*r*0.58, hy+r*0.42, r*0.13, 0, Math.PI*2); ctx.fill(); });
+  ctx.globalAlpha=1;
+  if(a.acc===1){ ctx.lineWidth=lw*0.9; [-1,1].forEach(k=>{ ctx.beginPath(); ctx.arc(hx+k*r*0.36, hy+r*0.12, r*0.25, 0, Math.PI*2); ctx.stroke(); }); ctx.beginPath(); ctx.moveTo(hx-r*0.11,hy+r*0.1); ctx.lineTo(hx+r*0.11,hy+r*0.1); ctx.stroke(); ctx.lineWidth=lw; }
+  if(a.acc===2){ ctx.fillStyle=INK; [-1,1].forEach(k=>{ ctx.beginPath(); ctx.roundRect(hx+k*r*0.36-r*0.28, hy-r*0.04, r*0.56, r*0.34, r*0.12); ctx.fill(); }); ctx.beginPath(); ctx.moveTo(hx-r*0.1,hy+r*0.04); ctx.lineTo(hx+r*0.1,hy+r*0.04); ctx.stroke(); }
+  if(a.acc===3){ ctx.beginPath(); ctx.ellipse(hx-r*0.1, hy-r*0.95, r*1.08, r*0.36, -0.18, 0, Math.PI*2); fs(INK); ctx.beginPath(); ctx.moveTo(hx-r*0.05, hy-r*1.3); ctx.lineTo(hx+r*0.05, hy-r*1.48); ctx.stroke(); }
+  if(a.acc===5){ ctx.lineWidth=lw*1.6; ctx.beginPath(); ctx.arc(hx, hy-r*0.05, r*1.12, Math.PI*1.08, Math.PI*1.92); ctx.stroke(); ctx.lineWidth=lw; [-1,1].forEach(k=>{ ctx.beginPath(); ctx.roundRect(hx+k*r*1.0-r*0.2, hy-r*0.12, r*0.4, r*0.6, r*0.16); fs('#FF4F9A'); }); }
+  ctx.restore();
+}
+function halftone(ctx, ox, oy, rad, step, color){
+  ctx.save(); ctx.fillStyle=color;
+  for(let x=ox-rad; x<=ox+rad; x+=step) for(let y=oy-rad; y<=oy+rad; y+=step){
+    const d = Math.hypot(x-ox,y-oy); if(d>rad) continue;
+    const rr = step*0.38*(1-d/rad); if(rr<.4) continue;
+    ctx.beginPath(); ctx.arc(x,y,rr,0,Math.PI*2); ctx.fill();
+  }
+  ctx.restore();
+}
+function paintAvatarCanvas(cv, a, bg, outfit){
+  if(!cv) return;
+  const dpr = Math.min(window.devicePixelRatio||1, 2), w = cv.clientWidth||200, h = cv.clientHeight||200;
+  cv.width = Math.round(w*dpr); cv.height = Math.round(h*dpr);
+  const ctx = cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
+  halftone(ctx, w*0.85, h*0.12, Math.min(w,h)*0.5, Math.min(w,h)/26, 'rgba(21,19,28,.16)');
+  const s = Math.min(w,h)*0.98;
+  drawAvatar(ctx, w/2, h/2 + s*0.04, s, a, outfit);
+}
+
+/* ============ CANVAS: POSTER ============ */
+const FONTS_READY = (async()=>{ try{ await Promise.all([document.fonts.load('100px Anton'), document.fonts.load('700 40px "Familjen Grotesk"'), document.fonts.load('600 30px "IBM Plex Mono"')]); }catch(e){} })();
+function fitFont(ctx, text, fam, max, maxW){ let sz=max; for(;sz>24;sz-=4){ ctx.font=`${sz}px ${fam}`; if(ctx.measureText(text).width<=maxW) break; } return sz; }
+function wrapLines(ctx, text, maxW){ const words=text.split(' '); const lines=[]; let cur=''; words.forEach(w=>{ const tst=cur?cur+' '+w:w; if(ctx.measureText(tst).width>maxW && cur){ lines.push(cur); cur=w; } else cur=tst; }); if(cur) lines.push(cur); return lines; }
+function clip(ctx, s, maxW){ if(ctx.measureText(s).width<=maxW) return s; while(s.length>3 && ctx.measureText(s+'…').width>maxW) s=s.slice(0,-1); return s.trim()+'…'; }
+async function drawPoster(cv, p){
+  if(!cv) return;
+  await FONTS_READY;
+  const W=1080, H=1920; cv.width=W; cv.height=H;
+  const ctx = cv.getContext('2d'), TT = T[p.lang];
+  const theme = themeAt(p.deck, p.combat);
+  const DISP = "Anton, Impact, sans-serif", BODY = "'Familjen Grotesk', Arial, sans-serif", MONO = "'IBM Plex Mono', monospace";
+  ctx.fillStyle = theme.color; ctx.fillRect(0,0,W,H);
+  halftone(ctx, W-60, 260, 420, 30, 'rgba(21,19,28,.18)');
+  halftone(ctx, 60, 1100, 300, 30, 'rgba(255,255,255,.35)');
+  ctx.lineWidth=14; ctx.strokeStyle=INK; ctx.strokeRect(36,36,W-72,H-72);
+  ctx.fillStyle=INK; ctx.textBaseline='alphabetic';
+  ctx.font=`600 32px ${MONO}`; ctx.fillText(TT.posterKicker, 90, 126);
+  ctx.textAlign='right'; ctx.fillText(TT.posterFict, W-90, 126); ctx.textAlign='left';
+  ctx.font=`170px ${DISP}`; ctx.fillText(TT.posterVote, 84, 310);
+  const parts = p.name.trim().split(/\s+/);
+  const l1 = (parts.length>1 ? parts.slice(0,-1).join(' ') : parts[0]).toUpperCase(), l2 = parts.length>1 ? parts[parts.length-1].toUpperCase() : '';
+  const sz = fitFont(ctx, l1, DISP, 150, W-180); ctx.font=`${sz}px ${DISP}`; let y2 = 310+sz*1.02; ctx.fillText(l1, 84, y2);
+  if(l2){ const sz2 = fitFont(ctx, l2, DISP, 150, W-180); ctx.font=`${sz2}px ${DISP}`; y2 += sz2*1.02; ctx.fillStyle='#FFFFFF'; ctx.lineWidth=10; ctx.strokeText(l2, 84, y2); ctx.fillText(l2, 84, y2); ctx.fillStyle=INK; }
+  // avatar medallion
+  const R = 185, cx = W/2, cy = y2 + R + 50;
+  ctx.beginPath(); ctx.arc(cx+18, cy+18, R, 0, Math.PI*2); ctx.fillStyle=INK; ctx.fill();
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.fillStyle='#FFFFFF'; ctx.fill(); ctx.clip();
+  halftone(ctx, cx+R*0.6, cy-R*0.7, R*0.9, 20, 'rgba(21,19,28,.14)');
+  drawAvatar(ctx, cx, cy+R*0.12, R*2.05, p.av, theme.color);
+  ctx.restore();
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.lineWidth=12; ctx.strokeStyle=INK; ctx.stroke();
+  // slogan sticker
+  const slogan = SLOGANS[theme.id][p.lang][p.slogan];
+  ctx.font=`700 54px ${BODY}`; const sl = wrapLines(ctx, slogan, 820);
+  const sh = sl.length*62 + 40, sy = cy + R + 34;
+  ctx.save(); ctx.translate(W/2, sy + sh/2); ctx.rotate(-0.035);
+  ctx.fillStyle=INK; ctx.fillRect(-450+12, -sh/2+12, 900, sh);
+  ctx.fillStyle='#FFFFFF'; ctx.fillRect(-450, -sh/2, 900, sh); ctx.lineWidth=8; ctx.strokeStyle=INK; ctx.strokeRect(-450,-sh/2,900,sh);
+  ctx.fillStyle=INK; ctx.textAlign='center'; sl.forEach((ln,i)=>ctx.fillText(ln, 0, -sh/2 + 20 + 48 + i*62)); ctx.restore(); ctx.textAlign='left';
+  // lower block: big mix (own poster) or priorities (guess poster)
+  let by = sy + sh + 70; const footY = H-110;
+  if(p.showMix){
+    const mix = mixOf(p.choices);
+    ctx.font=`600 32px ${MONO}`; ctx.fillStyle=INK; ctx.fillText(TT.posterMix, 90, by);
+    if(!mix.total){ ctx.font=`110px ${DISP}`; ctx.fillText(TT.posterIndep, 90, by+130); }
+    else {
+      const bx=90, bw=W-180, bh=46; by += 22; let x=bx;
+      mix.list.filter(r=>r.n).forEach(r=>{ const w=bw*r.share; ctx.fillStyle=CANDS[r.id].color; ctx.fillRect(x,by,w,bh); ctx.strokeStyle=INK; ctx.lineWidth=4; ctx.strokeRect(x,by,w,bh); x+=w; });
+      ctx.lineWidth=7; ctx.strokeRect(bx,by,bw,bh);
+      by += bh + 20;
+      const rows = mix.list.filter(r=>r.n); const avail = footY - 30 - by;
+      const rowH = Math.min(118, Math.floor(avail / Math.min(rows.length, 4)));
+      const shown = rows.slice(0, Math.max(1, Math.floor(avail/rowH)));
+      const pctSize = Math.round(rowH*0.86);
+      shown.forEach((r,i)=>{
+        const base = by + rowH*(i+1) - rowH*0.16;
+        ctx.fillStyle=CANDS[r.id].color; ctx.fillRect(90, base-rowH*0.62, rowH*0.62, rowH*0.62); ctx.lineWidth=6; ctx.strokeStyle=INK; ctx.strokeRect(90, base-rowH*0.62, rowH*0.62, rowH*0.62);
+        ctx.fillStyle=INK; ctx.font=`${pctSize}px ${DISP}`; const px = 90 + rowH*0.62 + 26; ctx.fillText(r.pct+'%', px, base);
+        const nx = px + ctx.measureText('100%').width + 24;
+        ctx.font=`${Math.round(rowH*0.5)}px ${DISP}`; ctx.fillText(clip(ctx, CANDS[r.id].name.toUpperCase(), W-90-nx), nx, base);
+      });
+    }
+  } else {
+    const picks = []; const ci = p.choices[p.combat]; if(ci && CARD[ci]) picks.push(ci);
+    p.choices.forEach(c=>{ if(c && CARD[c] && !picks.includes(c)) picks.push(c); });
+    ctx.font=`600 32px ${MONO}`; ctx.fillStyle=INK; ctx.fillText(TT.posterPrio, 90, by);
+    const maxLines = Math.floor((footY - 40 - by)/66);
+    picks.slice(0, Math.min(maxLines,5)).forEach((id,i)=>{
+      const yy = by + 72 + i*66; ctx.font=`700 46px ${BODY}`;
+      ctx.beginPath(); ctx.arc(104, yy-16, 11, 0, Math.PI*2); ctx.fill();
+      ctx.fillText(clip(ctx, CARD[id][p.lang][0], W-230), 132, yy);
+    });
+  }
+  ctx.fillStyle=INK; ctx.fillRect(36, footY, W-72, 74);
+  ctx.fillStyle='#FFD83D'; ctx.font=`600 30px ${MONO}`; ctx.textAlign='center';
+  ctx.fillText(TT.posterFoot, W/2, footY+48); ctx.textAlign='left';
+}
+
+/* ============ VIEWS ============ */
+function topbar(extra=''){
+  return `<header class="topbar">
+    <button class="logo" data-act="home" aria-label="${esc(t('brand'))}"><span class="logo-mark">TCI</span><span class="logo-text">${esc(t('brand'))}</span></button>
+    <div class="top-right">${extra}<div class="lang" role="group" aria-label="Langue / Language">
+      <button data-act="lang" data-v="fr" aria-pressed="${S.lang==='fr'}">FR</button><button data-act="lang" data-v="en" aria-pressed="${S.lang==='en'}">EN</button></div></div>
+  </header>`;
+}
+const xpChip = ()=>`<span class="xp" id="xp">${S.xp} XP</span>`;
+function setBg(c){ document.documentElement.style.setProperty('--bg', c); }
+
+function viewLanding(){
+  setBg('#FFD83D');
+  const st = t('stats').map(([b,s])=>`<div><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join('');
+  const steps = t('steps').map(([h,p],i)=>`<div class="step"><div class="n">${i+1}</div><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join('');
+  const unlike = t('unlike').map(([h,p])=>`<div><b>${esc(h)}</b>${esc(p)}</div>`).join('');
+  const cloud = BANK.map(th=>`<span style="background:${th.color}">${esc(L(th))}</span>`).join('');
+  const sample = ['melenchon','philippe','lepen','tondelier'].map(id=>`<span class="chip"><span class="dot" style="background:${CANDS[id].color}"></span>${esc(CANDS[id].name)}</span>`).join('');
+  const f = id=>esc(CARD[id][S.lang][0]);
+  return `<div class="landing">${topbar()}
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="sticker kicker mono">${esc(t('kicker'))}</span>
+        <h1 class="display">${esc(t('h1a'))}<br><span class="hl">${esc(t('h1b'))}</span><br>${esc(t('h1c'))}</h1>
+        <p class="lead">${esc(t('lead'))}</p>
+        <div class="ctas"><button class="btn primary" data-act="start">${esc(t('start'))} →</button><button class="btn ghost" data-act="how">${esc(t('how'))}</button></div>
+      </div>
+      <div class="hero-art">
+        <span class="sticker float f1">${f('logement_1')} ?</span>
+        <span class="sticker float f2">${f('travail_2')} ?</span>
+        <span class="sticker float f3">${f('impots_0')} ?</span>
+        <div class="slot"><canvas id="slotCv" aria-label="Avatar"></canvas><div class="slot-label" id="slotName">Léa Morel</div></div>
+      </div>
+    </section>
+    <div class="stats">${st}</div>
+    <p class="stats-note">${esc(t('statsNote'))}</p>
+    <section class="section"><h2 class="display">${esc(t('stepsT'))}</h2><div class="steps">${steps}</div></section>
+    <section class="section"><h2 class="display">${esc(t('themesT'))}</h2><div class="themes-cloud">${cloud}</div></section>
+    <section class="section"><h2 class="display">${esc(t('socialT'))}</h2>
+      <div class="social">
+        <div class="feat"><h3>${esc(t('guessT'))}</h3><p>${esc(t('guessP'))}</p>
+          <div class="guess-demo"><span class="q">${esc(t('guessQ'))}</span>${sample}</div></div>
+        <div class="feat"><h3>${esc(t('matchT'))}</h3><p>${esc(t('matchP'))}</p>
+          <div class="match-demo"><span class="big">62%</span><b>${esc(t('matchDemo'))}</b><span>${esc(t('matchDemo2'))}</span></div></div>
+      </div>
+    </section>
+    <section class="section"><h2 class="display">${esc(t('unlikeT'))}</h2><div class="unlike">${unlike}</div>
+      <form class="code-in" data-form="code"><label for="codeIn" class="mono" style="width:100%">${esc(t('codeL'))}</label>
+        <input id="codeIn" placeholder="https://…#c-…" autocomplete="off"><button class="btn small" type="submit">${esc(t('open'))}</button></form>
+      <p id="codeErr" class="hint" hidden>${esc(t('badCode'))}</p>
+    </section>
+    <footer class="foot"><span>${esc(t('footL'))}</span><span>${esc(t('demo'))} <button data-act="how">${esc(t('how'))}</button></span></footer>
+  </div>`;
+}
+
+function srcZone(id){
+  const src = SRC[CARD[id].s], open = S.openSrc.has(id);
+  return `<button class="src-toggle" data-act="src" data-id="${id}" aria-expanded="${open}">ⓘ ${esc(open?t('hideSource'):t('source'))}</button>
+    ${open?`<div class="src"><a href="${esc(src.url)}" target="_blank" rel="noopener">${esc(src.label)}</a><br><span>${esc(src.date)}</span><span class="badge-st">${esc(src.ok?t('sourced'):t('toConfirm'))}</span></div>`:''}`;
+}
+function viewTheme(){
+  const th = themeAt(S.deck, S.ti); setBg(th.color);
+  const cur = S.choices[S.ti];
+  const prog = S.deck.themes.map((_,i)=>`<i class="${i<S.ti?'done':i===S.ti?'cur':''}"></i>`).join('');
+  const cards = S.order[S.ti].map((id,k)=>{
+    const c = CARD[id], src = SRC[c.s], open = S.openSrc.has(id);
+    return `<div class="mcard ${cur===id?'sel':''}" data-id="${id}">
+      <span class="stamp">${esc(t('chosen'))}</span>
+      <button class="pick" data-act="pick" data-id="${id}" aria-pressed="${cur===id}">
+        <span class="tag"><span class="letter">${'ABCD'[k]}</span><span class="mono">${esc(t('measure'))} ${'ABCD'[k]}</span></span>
+        <span class="ttl">${esc(c[S.lang][0])}</span><span class="desc">${esc(c[S.lang][1])}</span>
+      </button>
+      <div class="src-zone">${srcZone(id)}</div>
+    </div>`;
+  }).join('');
+  return `<div class="col">${topbar(xpChip())}
+    <div class="progress" aria-hidden="true">${prog}</div>
+    <div class="level"><span class="mono">${esc(t('level'))} ${S.ti+1}/${ROUND_THEMES}</span>${S.ti>0?`<button class="backlink" data-act="prev">← ${esc(t('back'))}</button>`:''}</div>
+    <h2 class="display theme-title">${esc(L(th))}</h2>
+    <p class="prompt">${esc(t('prompt'))}</p>
+    <div class="cards" id="cards">${cards}</div>
+    <div class="actions">
+      <button class="btn ghost small" data-act="none">${esc(t('none'))}</button>
+      <button class="btn ghost small" data-act="skip">${esc(t('skip'))}</button>
+    </div>
+  </div>`;
+}
+
+function answeredIdx(){ const a = S.choices.map((c,i)=>c&&CARD[c]?i:-1).filter(i=>i>=0); return a.length?a:S.deck.themes.map((_,i)=>i); }
+
+function viewCreator(){
+  const th = themeAt(S.deck, S.combat); setBg(th.color);
+  const ctrl = (k,label,val)=>`<div class="ctrl"><button data-act="cyc" data-k="${k}" data-d="-1" aria-label="${esc(label)} -">‹</button><span>${esc(val)}</span><button data-act="cyc" data-k="${k}" data-d="1" aria-label="${esc(label)} +">›</button></div>`;
+  const chips = answeredIdx().map(i=>`<button class="chip" data-act="combat" data-i="${i}" aria-pressed="${S.combat===i}">${esc(L(themeAt(S.deck,i)))}</button>`).join('');
+  return `<div class="col">${topbar(xpChip())}
+    <span class="mono">${esc(t('level'))} 8 · ${esc(t('creatorT'))}</span>
+    <h2 class="display theme-title">${esc(t('creatorT'))}</h2>
+    <div class="creator-stage"><canvas id="avCv"></canvas></div>
+    <div class="ctrl-grid">
+      ${ctrl('hair',t('hair'),t('hairN')[S.av.hair])}
+      ${ctrl('hc',t('hairColor'),t('hairColor')+' '+(S.av.hc+1))}
+      ${ctrl('skin',t('skin'),t('skin')+' '+(S.av.skin+1))}
+      ${ctrl('acc',t('acc'),t('accN')[S.av.acc])}
+    </div>
+    <button class="btn small" data-act="randAv" style="justify-self:start;margin-bottom:18px">${esc(t('random'))}</button>
+    <div class="field"><label for="nameIn">${esc(t('nameL'))}</label>
+      <div class="row"><input id="nameIn" maxlength="28" value="${esc(S.name)}" autocomplete="off"><button class="btn small" data-act="newName">${esc(t('newName'))}</button></div></div>
+    <div class="field"><span class="lbl">${esc(t('combatL'))}</span><div class="chips">${chips}</div></div>
+    <div class="field"><span class="lbl">${esc(t('sloganL'))}</span>
+      <div class="row"><div class="slogan-box">« ${esc(SLOGANS[th.id][S.lang][S.slogan])} »</div><button class="btn small" data-act="newSlogan">${esc(t('newSlogan'))}</button></div></div>
+    <div class="actions"><button class="btn pink full big" data-act="toResult">${esc(t('seePoster'))} →</button></div>
+  </div>`;
+}
+
+function barsHTML(choices){
+  const mix = mixOf(choices);
+  if(!mix.total) return `<p style="margin:0;font-weight:600">${esc(t('noPick'))}</p>`;
+  const zeros = mix.list.filter(r=>!r.n);
+  return `<div class="bars">${mix.list.filter(r=>r.n).map(r=>`<div class="bar">
+    <div class="top"><div class="who"><b>${esc(CANDS[r.id].name)}</b><small>${esc(CANDS[r.id].party)}</small></div><span class="pct">${r.pct}%</span></div>
+    <div class="track"><div class="fill" data-w="${r.pct}" style="background:${CANDS[r.id].color}"></div></div></div>`).join('')}
+    ${zeros.length?`<div class="zeros"><span class="mono">0 %</span>${zeros.map(r=>`<span class="chip">${esc(CANDS[r.id].name)}</span>`).join('')}</div>`:''}</div>`;
+}
+
+function compatLine(cp){
+  if(!cp) return t('noOverlap');
+  if(cp.oppose===null) return t('fullAgree');
+  const on = i => { const th = themeAt(S.deck, i); return S.lang==='fr' ? th.on : L(th).toLowerCase(); };
+  const opp = t('opposeOn');
+  return (cp.agree!=null ? `${t('agreeOn')} ${on(cp.agree)} · ${opp}` : opp.charAt(0).toUpperCase()+opp.slice(1)) + ` ${on(cp.oppose)}`;
+}
+
+function viewResult(){
+  setBg('#FFD83D');
+  const mix = mixOf(S.choices);
+  const b = T[S.lang].badges, got = [];
+  if(mix.list.filter(r=>r.n).length>=4) got.push(b.free);
+  if(mix.total && mix.list[0].share>0.6) got.push(b.line);
+  if(S.choices.includes('n')) got.push(b.noLabel);
+  if(S.srcOpened.size>=3) got.push(b.curious);
+  if(S.choices.every(c=>c && c!=='s')) got.push(b.complete);
+  const rows = S.deck.themes.map((_,i)=>{
+    const th = themeAt(S.deck,i), c = S.choices[i];
+    const right = c && CARD[c] ? `<span class="chip c"><span class="dot" style="background:${CANDS[CARD[c].c].color}"></span>${esc(CANDS[CARD[c].c].name.split(' ').slice(-1)[0])}</span>` : `<span class="c mono">${esc(c==='n'?t('noneOf'):t('skipped'))}</span>`;
+    return `<div class="brow"><span class="t">${esc(L(th))}</span><span class="m">${c&&CARD[c]?esc(CARD[c][S.lang][0]):'—'}</span>${right}</div>`;
+  }).join('');
+  let compatHTML = '';
+  if(S.friend && S.friend.seed===S.seed){
+    const cp = compat(S.choices, S.friend.choices);
+    compatHTML = `<div class="panel compat"><div class="vs"><canvas id="cvMe"></canvas><span class="display" style="font-size:1.6rem">VS</span><canvas id="cvFr"></canvas></div>
+      <span class="mono">${esc(t('compatT'))} ${esc(S.friend.name)}</span>
+      <div class="score">${cp?cp.score:'—'}%</div><p class="line">${esc(compatLine(cp))}</p></div>`;
+  }
+  const link = shareLink(), msg = t('shareMsg') + ' ' + link;
+  const e = encodeURIComponent;
+  return `<div class="col">${topbar(xpChip())}
+    ${compatHTML}
+    <h2 class="display reveal-head">${esc(t('revealT'))}</h2>
+    <div class="poster-wrap"><canvas id="posterCv" width="1080" height="1920" aria-label="Poster"></canvas></div>
+    <div class="share-card">
+      <h3>${esc(t('shareT'))}</h3>
+      <p>${esc(t('shareP'))}</p>
+      <button class="btn pink big" data-act="copy">${esc(t('shareBtn'))}</button>
+      <div class="apps">
+        <a class="btn small" href="https://wa.me/?text=${e(msg)}" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn small" href="https://t.me/share/url?url=${e(link)}&text=${e(t('shareMsg'))}" target="_blank" rel="noopener">Telegram</a>
+        <a class="btn small" href="https://twitter.com/intent/tweet?text=${e(t('shareMsg'))}&url=${e(link)}" target="_blank" rel="noopener">X</a>
+      </div>
+      <button class="btn ghost" data-act="savePoster">${esc(t('save'))}</button>
+      <input readonly id="shareLink" value="${esc(link)}" aria-label="Lien" hidden>
+    </div>
+    <details class="panel more" open><summary>${esc(t('detailT'))}</summary>${barsHTML(S.choices)}</details>
+    ${got.length?`<div class="panel"><h3>${esc(t('badgesT'))}</h3><div class="badges">${got.map(([h,s])=>`<span class="badge"><b>${esc(h)}</b><small>${esc(s)}</small></span>`).join('')}</div></div>`:''}
+    <details class="panel more"><summary>${esc(t('breakdownT'))}</summary><div>${rows}</div></details>
+    <div class="stack">
+      <button class="btn primary" data-act="restart">${esc(t('again'))}</button>
+      <button class="btn ghost" data-act="toCreator">${esc(t('edit'))}</button>
+      <button class="btn ghost" data-act="how">${esc(t('how'))}</button>
+    </div>
+    <p class="demo-flag">${esc(t('demo'))}</p>
+  </div>`;
+}
+
+function viewGuess(){
+  const f = S.friend; setBg(themeAt(f.deck, f.combat).color);
+  const mix = mixOf(f.choices); const winner = mix.total ? mix.list[0].id : null;
+  const btns = CAND_IDS.map(id=>{
+    let cls=''; if(S.guessed){ if(id===winner) cls='right'; else if(id===S.guessed) cls='wrong'; }
+    return `<button class="btn small ${cls}" data-act="guess" data-id="${id}" ${S.guessed?'disabled':''}><span class="dot" style="background:${S.guessed?CANDS[id].color:'#fff'}"></span>${esc(CANDS[id].name)}</button>`;
+  }).join('');
+  const res = S.guessed ? `<div class="panel" style="text-align:center"><span class="display" style="font-size:2.4rem">${esc(S.guessed===winner?t('right'):t('wrong'))}</span>
+      ${S.guessed===winner?`<div class="mono" style="margin-top:4px">+50 XP</div>`:''}</div><div class="panel">${barsHTML(f.choices)}</div>
+      <div class="panel"><h3>${esc(t('challenge'))}</h3><p style="margin:0">${esc(t('challengeP'))}</p></div>` : '';
+  return `<div class="col">${topbar()}
+    <span class="mono">${esc(t('guessTitle'))}</span>
+    <h2 class="display theme-title">${esc(f.name)}</h2>
+    <div class="poster-wrap"><canvas id="frPoster" width="1080" height="1920"></canvas></div>
+    <p class="prompt">${esc(t('guessPrompt'))}</p>
+    <div class="guess-grid">${btns}</div>
+    ${res}
+    ${S.guessed?`<div class="actions"><button class="btn pink full big" data-act="startFriend">${esc(t('challenge'))} →</button></div>`:''}
+  </div>`;
+}
+
+function viewHow(){
+  setBg('#C9B8FF');
+  const blocks = t('howB').map(([h,p])=>`<h2>${esc(h)}</h2><p>${esc(p)}</p>`).join('');
+  const list = BANK.map(th=>`<h4>${esc(L(th))}</h4>` + th.cards.map(c=>{ const s=SRC[c.s]; return `<div><b>${esc(c[S.lang][0])}</b><br>${esc(CANDS[c.c].name)} · <a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a> (${esc(s.date)})<span class="badge-st">${esc(s.ok?t('sourced'):t('toConfirm'))}</span></div>`; }).join('')).join('');
+  return `<div class="col">${topbar()}
+    <h2 class="display theme-title">${esc(t('howT'))}</h2>
+    <div class="panel how">${blocks}</div>
+    <div class="panel"><p style="margin:0 0 12px;font-weight:600">${esc(t('demoNote'))}</p>
+      <details><summary>${esc(t('allSources'))}</summary><div class="srclist">${list}</div></details></div>
+    <div class="actions"><button class="btn primary full" data-act="back">← ${esc(t('back'))}</button></div>
+  </div>`;
+}
+
+/* ============ RENDER ============ */
+let slotTimer = null;
+function render(){
+  clearInterval(slotTimer);
+  const v = S.view;
+  app.innerHTML = v==='landing'?viewLanding(): v==='theme'?viewTheme(): v==='creator'?viewCreator(): v==='result'?viewResult(): v==='guess'?viewGuess(): viewHow();
+  document.documentElement.lang = S.lang;
+  after(v);
+}
+function fillBars(){ requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll('.fill').forEach((el,i)=>{ el.style.transitionDelay=(i*0.12)+'s'; el.style.width=el.dataset.w+'%'; }))); }
+function posterData(){ return {deck:S.deck, av:S.av, name:S.name, combat:S.combat, slogan:S.slogan, choices:S.choices, showMix:true, lang:S.lang}; }
+function after(v){
+  if(v==='landing'){
+    const cv = document.getElementById('slotCv'), nm = document.getElementById('slotName');
+    const bgs = ['#2B4BFF','#FF4F9A','#7DF0C2','#FF9F1C','#C9B8FF'];
+    let k = 0;
+    const spin = ()=>{ paintAvatarCanvas(cv, randomAvatar(), bgs[k%bgs.length], BANK[k%BANK.length].color); nm.textContent = FIRST[rnd(FIRST.length)]+' '+LAST[rnd(LAST.length)]; k++; };
+    spin(); slotTimer = setInterval(spin, 1600);
+  }
+  if(v==='creator') paintAvatarCanvas(document.getElementById('avCv'), S.av, '#FFFFFF', themeAt(S.deck,S.combat).color);
+  if(v==='result'){
+    drawPoster(document.getElementById('posterCv'), posterData());
+    fillBars();
+    if(S.friend && S.friend.seed===S.seed){ paintAvatarCanvas(document.getElementById('cvMe'),S.av,'#FFFFFF',themeAt(S.deck,S.combat).color); paintAvatarCanvas(document.getElementById('cvFr'),S.friend.av,'#FFFFFF',themeAt(S.friend.deck,S.friend.combat).color); }
+  }
+  if(v==='guess'){
+    drawPoster(document.getElementById('frPoster'), {...S.friend, showMix:false, lang:S.lang});
+    if(S.guessed) fillBars();
+  }
+}
+function go(v){ if(v!=='how') S.back = v; S.view = v; render(); window.scrollTo({top:0}); }
+
+function toast(msg){ const el=document.createElement('div'); el.className='toast'; el.textContent=msg; document.body.appendChild(el); setTimeout(()=>el.remove(), 2200); }
+function xpPop(txt){ const el=document.createElement('div'); el.className='xp-pop'; el.textContent=txt; document.body.appendChild(el); setTimeout(()=>el.remove(), 950); }
+
+/* ============ ACTIONS ============ */
+function startGame(seed){
+  S.seed = seed || newSeed(); S.deck = buildDeck(S.seed);
+  S.ti=0; S.xp=0; S.lock=false; S.revealed=false; S.choices=Array(ROUND_THEMES).fill(null); S.srcOpened=new Set(); S.openSrc=new Set();
+  shuffleOrders(); go('theme');
+}
+function advance(choice, xp){
+  S.choices[S.ti] = choice; if(xp){ S.xp+=xp; xpPop('+'+xp+' XP'); }
+  S.lock = false;
+  if(S.ti<ROUND_THEMES-1){ S.ti++; go('theme'); } else enterCreator();
+}
+function enterCreator(){
+  if(!S.av){ S.av = randomAvatar(); S.first=rnd(FIRST.length); S.last=rnd(LAST.length); S.name = FIRST[S.first]+' '+LAST[S.last]; S.slogan=rnd(3); }
+  const ans = answeredIdx(); if(!ans.includes(S.combat)) S.combat = ans[0];
+  go('creator');
+}
+const ACT = {
+  home:()=>{ S.friend=null; S.guessed=null; try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} go('landing'); },
+  lang:(el)=>{ S.lang = el.dataset.v; try{ localStorage.setItem('tci-lang', S.lang); }catch(e){} render(); },
+  start:()=>{ S.friend=null; startGame(); },
+  how:()=>{ S.view='how'; render(); window.scrollTo({top:0}); },
+  back:()=>go(S.back || 'landing'),
+  pick:(el)=>{
+    if(S.lock || Date.now() < (S.noPickUntil||0)) return; S.lock = true;
+    const id = el.dataset.id;
+    document.querySelectorAll('.mcard').forEach(c=>{ const on = c.dataset.id===id; c.classList.toggle('sel', on); const b=c.querySelector('.pick'); if(b) b.setAttribute('aria-pressed', on); });
+    document.getElementById('cards').classList.add('locked');
+    setTimeout(()=>advance(id, 10), 480);
+  },
+  src:(el, e)=>{
+    e.stopPropagation(); S.noPickUntil = Date.now() + 1200;
+    const id=el.dataset.id; if(S.openSrc.has(id)) S.openSrc.delete(id); else { S.openSrc.add(id); S.srcOpened.add(id); }
+    const zone = el.closest('.src-zone'); zone.innerHTML = srcZone(id); zone.querySelector('.src-toggle').focus();
+  },
+  none:()=>{ if(!S.lock) advance('n', 5); },
+  skip:()=>{ if(!S.lock) advance('s', 0); },
+  prev:()=>{ if(S.ti>0 && !S.lock){ S.ti--; go('theme'); } },
+  cyc:(el)=>{ const k=el.dataset.k, d=+el.dataset.d, n = k==='hair'?N_HAIR : k==='acc'?N_ACC : k==='hc'?HAIRC.length : SKINS.length; S.av[k]=(S.av[k]+d+n)%n; render(); },
+  randAv:()=>{ S.av=randomAvatar(); render(); },
+  newName:()=>{ S.first=rnd(FIRST.length); S.last=rnd(LAST.length); S.name=FIRST[S.first]+' '+LAST[S.last]; render(); },
+  combat:(el)=>{ S.combat=+el.dataset.i; render(); },
+  newSlogan:()=>{ S.slogan=(S.slogan+1)%3; render(); },
+  toCreator:()=>go('creator'),
+  toResult:()=>{ if(!S.name.trim()) S.name = FIRST[S.first]+' '+LAST[S.last]; if(!S.revealed){ S.revealed=true; S.xp+=20; } go('result'); },
+  savePoster:()=>{
+    const cv=document.getElementById('posterCv'); let url; try{ url=cv.toDataURL('image/png'); }catch(e){ return; }
+    const m=document.createElement('div'); m.className='modal';
+    m.innerHTML=`<div class="modal-in" role="dialog" aria-modal="true"><img src="${url}" alt="Poster"><p style="margin:0;font-weight:600">${esc(t('saveHint'))}</p><button class="btn primary" data-close>${esc(t('close'))}</button></div>`;
+    m.addEventListener('click',ev=>{ if(ev.target===m || ev.target.hasAttribute('data-close')) m.remove(); });
+    document.body.appendChild(m);
+  },
+  copy:()=>{
+    const inp=document.getElementById('shareLink');
+    const text = t('shareMsg') + ' ' + inp.value;
+    const fallback = ()=>{ inp.hidden=false; inp.style.cssText='width:100%;border:2px solid #fff;border-radius:12px;padding:10px;font:500 .8rem var(--mono);background:#fff'; inp.focus(); inp.select(); toast(t('copyFail')); };
+    try{ navigator.clipboard.writeText(text).then(()=>toast(t('copied')), fallback); }catch(e){ fallback(); }
+  },
+  restart:()=>{ S.friend=null; S.av=null; startGame(); },
+  guess:(el)=>{ S.guessed=el.dataset.id; const mix=mixOf(S.friend.choices); if(mix.total && mix.list[0].id===S.guessed){ S.xp+=50; xpPop('+50 XP'); } const y=window.scrollY; render(); window.scrollTo({top:y}); },
+  startFriend:()=>{ const keepXp = S.xp; S.av=null; startGame(S.friend.seed); S.xp = keepXp; render(); },
+};
+// Sources live outside the pick button; any touch there also blocks picking for a moment,
+// so tapping a source link (which opens a new tab) can never advance the round.
+const guardSrc = e=>{ if(e.target.closest('.src-zone')) S.noPickUntil = Date.now() + 1200; };
+app.addEventListener('pointerdown', guardSrc, true);
+app.addEventListener('touchstart', guardSrc, {capture:true, passive:true});
+app.addEventListener('click', e=>{
+  if(e.target.closest('.src')) return;
+  const el = e.target.closest('[data-act]'); if(!el) return;
+  if(el.dataset.act==='src'){ ACT.src(el, e); return; }
+  const fn = ACT[el.dataset.act]; if(fn) fn(el, e);
+});
+app.addEventListener('input', e=>{ if(e.target.id==='nameIn'){ S.name=e.target.value.slice(0,28); } });
+app.addEventListener('submit', e=>{
+  e.preventDefault();
+  const v = (document.getElementById('codeIn').value||'').trim(); const tok = v.includes('#') ? v.split('#').pop() : v;
+  if(!openToken(tok)){ document.getElementById('codeErr').hidden=false; }
+});
+
+function openToken(tok){
+  const f = parseToken(tok); if(!f) return false;
+  S.friend = f; S.guessed = null; go('guess'); return true;
+}
+
+/* ============ BOOT ============ */
+try{ const l = localStorage.getItem('tci-lang'); if(l==='fr'||l==='en') S.lang=l; }catch(e){}
+const tok = (location.hash||'').slice(1);
+if(!(tok && openToken(tok))) render();
+window.addEventListener('hashchange', ()=>{ const tk=(location.hash||'').slice(1); if(tk) openToken(tk); });
+})();
+</script>
+
+</body>
+</html>
